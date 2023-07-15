@@ -1,6 +1,5 @@
 <template>
   <main>
-    <KeepForm />
     <div class="col-md-4" v-for="k in keeps" :key="k.id">
       <KeepCard :keep="k" />
     </div>

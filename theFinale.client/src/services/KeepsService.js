@@ -17,6 +17,29 @@ class KeepsService{
     AppState.keeps = res.data.map(k => new Keep(k))
     logger.log('keeps appstate', AppState.keeps)
   }
+
+  async getKeepById(keepId){
+    const res = await api.get(`api/keeps/${keepId}`)
+    this.updateViews(keepId)
+    // logger.log(res.data)
+    AppState.activeKeep = new Keep(res.data)
+    logger.log(AppState.activeKeep)
+  }
+
+  async updateViews(keepId){
+    debugger
+    if(!AppState.account) {
+      logger.log('not logged in, wont update views')
+      return
+    }
+    let updateData = AppState.activeKeep.views ++
+    
+    const res = await api.put(`api/keeps/${keepId}`, updateData)
+    logger.log(res.data)
+
+  }
+
+
 }
 
 export const keepsService = new KeepsService()

@@ -5,6 +5,11 @@
   <main>
     <router-view />
   </main>
+
+  <Modal id="keepModal" class="modal instant" tabindex="-1" role="dialog">
+    <KeepModal />
+  </Modal>
+
 </template>
 
 <script>
