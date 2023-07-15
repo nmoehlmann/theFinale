@@ -15,15 +15,20 @@ namespace theFinale.Services
       return newVault;
     }
 
-    internal Vault DeleteVault(int vaultId, string id)
+    internal Vault DeleteVault(int vaultId, string userId)
     {
-      throw new NotImplementedException();
+      Vault foundVault = GetVaultById(vaultId);
+      if(foundVault.creatorId != userId) throw new Exception("Unauthorized to delete vault");
+
+      int rows = _repo.DeleteVault(vaultId);
+      return foundVault;
     }
 
     internal Vault GetVaultById(int vaultId)
     {
       Vault vault = _repo.GetVaultById(vaultId);
       if (vault == null) throw new Exception("Invalid Id");
+      if (vault.isPrivate == true) throw new Exception("This vault is private");
       return vault;
     }
 

@@ -33,7 +33,14 @@ namespace theFinale.Repositories
       return newVault;
     }
 
-    internal Vault GetVaultById(int vaultId)
+        internal int DeleteVault(int vaultId)
+        {
+            string sql = @"DELETE FROM vaults WHERE id = @vaultId LIMIT 1;";
+            int rows = _db.Execute(sql, new {vaultId});
+            return rows;
+        }
+
+        internal Vault GetVaultById(int vaultId)
     {
       string sql = @"
       SELECT
