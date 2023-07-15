@@ -51,13 +51,16 @@ namespace theFinale.Repositories
         {
             string sql = @"
             SELECT
-            FROM VaultKeeps vk
-            JOIN accounts act ON act.id = vk.accountId
+            vk.*,
+            act.*
+            FROM vaultKeeps vk
+            JOIN accounts act ON act.Id = vk.creatorId
             WHERE vk.vaultId = @vaultId
             ;";
 
-            List<vk> vks = _db.Query<VaultKeep, vk, vk>(sql, (vaultkeep, vk) => {
+            List<vk> vks = _db.Query<VaultKeep, Account, vk, vk>(sql, (vaultkeep, creator, vk) => {
                 vk.vaultKeepId = vaultkeep.id;
+                vk.creator = creator;
                 return vk;
             }, new {vaultId}).ToList();
             return vks;
