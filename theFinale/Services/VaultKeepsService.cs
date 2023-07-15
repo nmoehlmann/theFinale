@@ -18,7 +18,7 @@ namespace theFinale.Services
 
         internal VaultKeep GetVkById(int vkId)
         {
-            VaultKeep vk = _repo.GetVksById(vkId);
+            VaultKeep vk = _repo.GetVkById(vkId);
             if(vk == null) throw new Exception("Invalid Id");
             return vk;
         }
@@ -32,10 +32,10 @@ namespace theFinale.Services
             return foundVk;
         }
 
-        internal List<VaultKeep> GetVksByVaultId(int vaultId, Vault vault)
+        internal List<vk> GetVksByVaultId(int vaultId, Vault vault)
         {
             if(vault.isPrivate == true) throw new Exception("This vault is private");
-            List<VaultKeep> vks = _repo.GetVksByVaultId(vaultId);
+            List<vk> vks = _repo.GetVksByVaultId(vaultId);
             return vks;
         }
     }

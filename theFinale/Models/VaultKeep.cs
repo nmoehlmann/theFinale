@@ -9,9 +9,9 @@ namespace theFinale.Models
 
         // virtuals below
 
-        public Account creator {get; set;}
+        // public Account creator {get; set;}
 
         // this is only here for postman
-        public int vaultKeepId {get; set;}
+        // public int vaultKeepId {get; set;}
     }
 }

@@ -34,36 +34,30 @@ namespace theFinale.Repositories
             return rows;
         }
 
-        internal VaultKeep GetVksById(int vkId)
+        internal VaultKeep GetVkById(int vkId)
         {
             string sql = @"
             SELECT
-            v.*,
-            creator.*
-            FROM vaultKeeps v
-            JOIN accounts creator ON v.creatorId = creator.id
-            WHERE v.id = @vkId
+            *
+            FROM vaultKeeps
+            WHERE id = @vkId
             ;";
 
-            VaultKeep vk = _db.Query<VaultKeep, Account, VaultKeep>(sql, (vk, creator) => {
-                vk.creator = creator;
-                return vk;
-            }, new {vkId}).FirstOrDefault();
+            VaultKeep vk = _db.Query<VaultKeep>(sql, new {vkId}).FirstOrDefault();
             return vk;
-        }
+            }
 
-        internal List<VaultKeep> GetVksByVaultId(int vaultId)
+        internal List<vk> GetVksByVaultId(int vaultId)
         {
             string sql = @"
-            SELECT * FROM vaultKeeps vk
-            JOIN accounts act ON vk.creatorId = act.id
+            SELECT
+            FROM VaultKeeps vk
+            JOIN accounts act ON act.id = vk.accountId
             WHERE vk.vaultId = @vaultId
             ;";
 
-            List<VaultKeep> vks = _db.Query<VaultKeep, Account, VaultKeep>(sql, (vk, act) => {
-                vk.creator = act;
-                // this is only here for postman
-                vk.vaultKeepId = vk.id;
+            List<vk> vks = _db.Query<VaultKeep, vk, vk>(sql, (vaultkeep, vk) => {
+                vk.vaultKeepId = vaultkeep.id;
                 return vk;
             }, new {vaultId}).ToList();
             return vks;

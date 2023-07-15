@@ -84,12 +84,12 @@ namespace theFinale.Controllers
     }
 
     [HttpGet("{vaultId}/keeps")]
-    public ActionResult<List<VaultKeep>> GetVksByVaultId(int vaultId)
+    public ActionResult<List<vk>> GetVksByVaultId(int vaultId)
     {
       try
       {
         Vault vault = _vs.GetVaultById(vaultId);
-        List<VaultKeep> vks = _vks.GetVksByVaultId(vaultId, vault);
+        List<vk> vks = _vks.GetVksByVaultId(vaultId, vault);
         return Ok(vks);
       }
       catch (Exception e)
