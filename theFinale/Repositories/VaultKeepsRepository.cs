@@ -27,6 +27,31 @@ namespace theFinale.Repositories
             return newVk;
         }
 
+        internal int DeleteVaultKeep(int vaultKeepId)
+        {
+            string sql = @"DELETE FROM vaultKeeps WHERE id = @vaultKeepId LIMIT 1;";
+            int rows = _db.Execute(sql, new {vaultKeepId});
+            return rows;
+        }
+
+        internal VaultKeep GetVksById(int vkId)
+        {
+            string sql = @"
+            SELECT
+            v.*,
+            creator.*
+            FROM vaultKeeps v
+            JOIN accounts creator ON v.creatorId = creator.id
+            WHERE v.id = @vkId
+            ;";
+
+            VaultKeep vk = _db.Query<VaultKeep, Account, VaultKeep>(sql, (vk, creator) => {
+                vk.creator = creator;
+                return vk;
+            }, new {vkId}).FirstOrDefault();
+            return vk;
+        }
+
         internal List<VaultKeep> GetVksByVaultId(int vaultId)
         {
             string sql = @"

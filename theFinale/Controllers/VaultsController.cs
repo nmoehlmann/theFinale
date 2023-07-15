@@ -88,7 +88,8 @@ namespace theFinale.Controllers
     {
       try
       {
-        List<VaultKeep> vks = _vks.GetVksByVaultId(vaultId);
+        Vault vault = _vs.GetVaultById(vaultId);
+        List<VaultKeep> vks = _vks.GetVksByVaultId(vaultId, vault);
         return Ok(vks);
       }
       catch (Exception e)
