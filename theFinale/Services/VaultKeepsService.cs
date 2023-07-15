@@ -14,5 +14,11 @@ namespace theFinale.Services
             VaultKeep newVk = _repo.CreateVaultKeep(vkData);
             return newVk;
         }
+
+        internal List<VaultKeep> GetVksByVaultId(int vaultId)
+        {
+            List<VaultKeep> vks = _repo.GetVksByVaultId(vaultId);
+            return vks;
+        }
     }
 }

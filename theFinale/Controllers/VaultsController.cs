@@ -7,11 +7,13 @@ namespace theFinale.Controllers
     private readonly VaultsService _vs;
 
     private readonly Auth0Provider _auth;
+    private readonly VaultKeepsService _vks;
 
-    public VaultsController(VaultsService vs, Auth0Provider auth)
+    public VaultsController(VaultsService vs, Auth0Provider auth, VaultKeepsService vks)
     {
       _vs = vs;
       _auth = auth;
+      _vks = vks;
     }
 
     [HttpPost]
@@ -74,6 +76,20 @@ namespace theFinale.Controllers
 
         Vault deletedVault = _vs.DeleteVault(vaultId, userInfo.Id);
         return Ok(deletedVault);
+      }
+      catch (Exception e)
+      {
+        return BadRequest(e.Message);
+      }
+    }
+
+    [HttpGet("{vaultId}/keeps")]
+    public ActionResult<List<VaultKeep>> GetVksByVaultId(int vaultId)
+    {
+      try
+      {
+        List<VaultKeep> vks = _vks.GetVksByVaultId(vaultId);
+        return Ok(vks);
       }
       catch (Exception e)
       {

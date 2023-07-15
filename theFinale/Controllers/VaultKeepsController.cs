@@ -30,12 +30,10 @@ namespace theFinale.Controllers
                 VaultKeep newVk = _vks.CreateVaultKeep(vkData);
                 return new ActionResult<VaultKeep>(Ok(newVk));
             }
-            catch (System.Exception)
+                catch (Exception e)
             {
-                
-                throw;
+                return BadRequest(e.Message);
             }
         }
-        
     }
 }
