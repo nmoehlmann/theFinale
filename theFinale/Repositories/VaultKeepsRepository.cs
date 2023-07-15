@@ -50,14 +50,10 @@ namespace theFinale.Repositories
         internal List<vk> GetVksByVaultId(int vaultId)
         {
             string sql = @"
-            SELECT
-            vaultkeep.*,
-            keep.*,
-            creator.*
-            FROM vaultKeeps vaultkeep
-            JOIN keeps keep ON keep.id = vaultkeep.keepId
-            JOIN accounts creator ON creator.id = vaultkeep.creatorId
-            WHERE vaultkeep.vaultId = @vaultId
+            SELECT * FROM vaultKeeps
+            JOIN keeps ON keeps.id = vaultKeeps.keepId
+            JOIN accounts ON accounts.id = vaultKeeps.creatorId
+            WHERE vaultKeeps.vaultId = @vaultId;
             ;";
 
             List<vk> vks = _db.Query<VaultKeep, Account, vk, vk>(sql, (vaultkeep, creator, vk) => {
@@ -66,6 +62,7 @@ namespace theFinale.Repositories
                 return vk;
             }, new {vaultId}).ToList();
             return vks;
+
         }
     }
 }

@@ -105,5 +105,17 @@ WHERE vaultkeep.vaultId = 88;
 SELECT * FROM vaultKeeps
 JOIN keeps ON keeps.id = vaultKeep.keepId;
 
+SELECT * FROM vaultKeeps
+JOIN keeps ON keeps.id = vaultKeeps.keepId
+JOIN accounts ON accounts.id = vaultKeeps.creatorId
+WHERE vaultKeeps.vaultId = 70;
+
+SELECT
+v.*,
+act.*
+FROM vaults v
+JOIN accounts act ON act.id = '64b17fe0de8c335127556c93'
+WHERE v.creatorId = '64b17fe0de8c335127556c93'
+
 
 
