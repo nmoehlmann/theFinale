@@ -15,4 +15,11 @@ namespace theFinale.Models
     public Account creator { get; set; }
 
   }
+
+  public class vk : Keep
+  {
+    public int vaultKeepId {get; set;}
+
+    public int vaultId {get; set;}
+  }
 }
