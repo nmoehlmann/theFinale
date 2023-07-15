@@ -74,3 +74,36 @@ DROP TABLE vaults;
 DROP TABLE keeps;
 
 DROP TABLE vaultKeeps;
+
+SELECT * FROM keeps
+JOIN accounts ON accounts.id = '64b17fe0de8c335127556c93'
+WHERE keeps.creatorId = '64b17fe0de8c335127556c93';
+
+SELECT
+k.*,
+act.*
+FROM keeps k
+JOIN accounts act ON act.id = '64b17fe0de8c335127556c93'
+WHERE k.creatorId = '64b17fe0de8c335127556c93';
+
+SELECT
+v.*,
+act.*
+FROM vaults v
+JOIN accounts act ON act.id = '64b17fe0de8c335127556c93'
+WHERE v.creatorId = '64b17fe0de8c335127556c93';
+
+SELECT
+vaultkeep.*,
+keep.*,
+creator.*
+FROM vaultKeeps vaultkeep
+JOIN keeps keep ON keep.id = vaultkeep.keepId
+JOIN accounts creator ON creator.id = vaultkeep.creatorId
+WHERE vaultkeep.vaultId = 88;
+
+SELECT * FROM vaultKeeps
+JOIN keeps ON keeps.id = vaultKeep.keepId;
+
+
+
