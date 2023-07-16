@@ -77,7 +77,9 @@ namespace theFinale.Repositories
       UPDATE keeps SET
       name = @name,
       description = @description,
-      img = @img
+      img = @img,
+      views = @views
+      WHERE id = @id
       ;";
       _db.Execute(sql, updateData);
     }

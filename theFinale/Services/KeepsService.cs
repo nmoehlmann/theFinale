@@ -26,6 +26,8 @@ namespace theFinale.Services
     {
       Keep keep = _repo.GetKeepById(keepId);
       if (keep == null) throw new Exception("Invalid Id");
+      keep.views++;
+      _repo.UpdateKeep(keep);
       return keep;
     }
 

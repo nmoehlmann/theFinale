@@ -20,24 +20,26 @@ class KeepsService{
 
   async getKeepById(keepId){
     const res = await api.get(`api/keeps/${keepId}`)
-    this.updateViews(keepId)
+    // this.updateViews(keepId)
     // logger.log(res.data)
     AppState.activeKeep = new Keep(res.data)
     logger.log(AppState.activeKeep)
   }
 
-  async updateViews(keepId){
-    debugger
-    if(!AppState.account) {
-      logger.log('not logged in, wont update views')
-      return
-    }
-    let updateData = AppState.activeKeep.views ++
+  // async updateViews(keepId){
+  //   // debugger
+  //   if(!AppState.account) {
+  //     logger.log('not logged in, wont update views')
+  //     return
+  //   }
+  //   const updateData = AppState.keeps.find(k => k.id == keepId)
+  //   updateData.views + 1
+  //   logger.log(updateData, 'this is updateData')
     
-    const res = await api.put(`api/keeps/${keepId}`, updateData)
-    logger.log(res.data)
+  //   const res = await api.put(`api/keeps/${keepId}`, updateData)
+  //   logger.log(res.data)
 
-  }
+  // }
 
 
 }

@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-dialog-centered modal-xl">
         <div class="modal-content">
             <main class="container-fluid">
-                <section class="row" v-if="activeKeep">
+                <section class="row" v-if="keep">
                     <div class="col-lg-6">
                         <div class="keep-img">
                             <!-- img -->
@@ -26,8 +26,8 @@
                                 <!-- TODO add vaults option input -->
                                 <button class="btn btn-dark">Save</button>
                                 <div class="d-flex gap-2">
-                                    <img class="creator-img rounded-circle" :src="keep.creator.picture" alt="">
-                                    <p>{{ keep.creator.name }}</p>
+                                    <img class="creator-img rounded-circle" :src="keep?.creator?.picture" alt="">
+                                    <p>{{ keep?.creator?.name }}</p>
                                 </div>
                             </div>
                         </section>

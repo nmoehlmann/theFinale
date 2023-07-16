@@ -10,6 +10,13 @@
     <KeepModal />
   </Modal>
 
+  <Modal id="keepForm" class="modal instant" tabindex="-1" role="dialog">
+    <KeepFormModal />
+  </Modal>
+  <Modal id="vaultForm" class="modal instant" tabindex="-1" role="dialog">
+    <VaultFormModal />
+  </Modal>
+
 </template>
 
 <script>
