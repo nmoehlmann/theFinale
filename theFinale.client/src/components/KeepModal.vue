@@ -25,10 +25,12 @@
                             <div class="d-flex justify-content-between">
                                 <!-- TODO add vaults option input -->
                                 <button class="btn btn-dark">Save</button>
-                                <div class="d-flex gap-2">
-                                    <img class="creator-img rounded-circle" :src="keep?.creator?.picture" alt="">
-                                    <p>{{ keep?.creator?.name }}</p>
-                                </div>
+                                <router-link :to="{name: 'Profile', params: {id: keep.creatorId}}">
+                                    <div class="d-flex gap-2" data-bs-dismiss="modal">
+                                        <img class="creator-img rounded-circle" :src="keep?.creator?.picture" alt="">
+                                        <p>{{ keep?.creator?.name }}</p>
+                                    </div>
+                                </router-link>
                             </div>
                         </section>
                     </div>
@@ -47,7 +49,7 @@ export default {
     setup(){
         return {
             keep: computed(() => AppState.activeKeep),
-            keepImg: computed(() => `url(${AppState.activeKeep.img})`)
+            keepImg: computed(() => `url(${AppState.activeKeep.img})`),
         }
     }
 }

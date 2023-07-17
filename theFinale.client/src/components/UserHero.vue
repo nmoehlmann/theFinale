@@ -3,7 +3,7 @@
         <div class="col-12">
             <img class="coverImg img-fluid" src="https://codetheweb.blog/assets/img/posts/css-advanced-background-images/cover.jpg" alt="">
             <div class="d-flex flex-column align-items-center pfp-container">
-                <img class="pfp" :src="account.picture" alt="">
+                <img class="pfp" :src="account?.picture" alt="">
                 <h1>{{ account.name }}</h1>
                 <!-- TODO accounts keeps and vaults displayed -->
             </div>

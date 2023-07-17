@@ -16,6 +16,10 @@
               <input class="input-text" type="text" placeholder="Image URL..." v-model="editable.img" required>
               <span class="required">*</span>
             </div>
+            <div class="mb-3 d-flex flex-column align-items-center">
+              <label for="description"><p class="fs-5">Vault Description</p></label>
+              <textarea name="description" class="description" cols="30" rows="3" v-model="editable.description" required minlength="2"></textarea>
+            </div>
             <div class="col-6 offset-6 d-flex justify-content-end flex-column">
                 <div class="">
                     <p class="tiny-text">Private vaults can only be seen by you</p>
@@ -38,6 +42,7 @@
 import { ref } from 'vue';
 import { logger } from '../utils/Logger';
 import { Modal } from 'bootstrap';
+import { vaultsService } from '../services/VaultsService';
 
 export default {
     setup(){

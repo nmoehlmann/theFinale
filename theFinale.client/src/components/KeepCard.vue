@@ -1,8 +1,11 @@
 <template>
-  <main class="elevation-3" data-bs-toggle="modal" data-bs-target="#keepModal" @click="getKeepById(keep.id)">
-    <h1>{{ keep.name }}</h1>
-    <img :src="keep.img" alt="">
-    <p>{{ keep.description }}</p>
+  <main class="d-flex flex-column justify-content-between elevation-3 keep-img p-2" data-bs-toggle="modal" data-bs-target="#keepModal" @click="getKeepById(keep.id)">
+    <div class="d-flex justify-content-end">
+      <img class="rounded-circle pfp" :src="keep?.creator?.picture" alt="">
+    </div>
+    <div class="d-flex justify-content-start title-card text-light p-2 mx-2">
+      <h1>{{ keep.name }}</h1>
+    </div>
   </main>
 </template>
 
@@ -18,7 +21,7 @@ export default {
   props: {
     keep: { type: Keep, required: true }
   },
-  setup() {
+  setup(props) {
     return {
       async getKeepById(keepId) {
         try {
@@ -27,11 +30,34 @@ export default {
         } catch (error) {
           logger.log('getting keep by id', error)
         }
-      }
+      },
+      keepImg: computed(() => `url(${props.keep?.img})`)
     }
   }
 }
 </script>
 
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+  .keep-img {
+    background-image: v-bind(keepImg);
+    height: 15rem;
+    margin-bottom: 2rem;;
+  }
+
+  .pfp {
+    height: 3.5rem;
+  }
+
+  .title-card {
+    background: rgba(0, 0, 0, 0.41);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(13.9px);
+    -webkit-backdrop-filter: blur(13.9px);
+  }
+
+  p, h1 {
+    margin: 0;
+  }
+</style>
