@@ -8,7 +8,7 @@
       </div>
       <div class="d-flex justify-content-center mt-3 fw-medium fs-3">
         <p class="keep-count">{{ keeps.length }} Keeps</p>
-        <div class="dropdown options">
+        <div class="dropdown options" v-if="vault.creatorId == account.id">
           <button class="btn fs-2 fw-medium" type="button" data-bs-toggle="dropdown" aria-expanded="false">
             ...
           </button>
@@ -69,6 +69,7 @@ export default {
       vault: computed(() => AppState?.activeVault),
       vaultImg: computed(() => `url(${AppState?.activeVault?.img})`),
       keeps: computed(() => AppState.keepsInVault),
+      account: computed(() => AppState.account),
 
       async deleteVault() {
         try {
