@@ -2,7 +2,7 @@
   <div class="modal-dialog modal-dialog-centered modal-md">
     <div class="modal-content">
       <main class="container-fluid p-4">
-        <form>
+        <form @submit.prevent="createVault()">
           <section class="d-flex justify-content-between align-items-center mb-5">
             <h1>Add Your Vault</h1>
             <button class="cancel-button btn-close" type="button" data-bs-dismiss="modal"></button>
@@ -19,8 +19,8 @@
             <div class="col-6 offset-6 d-flex justify-content-end flex-column">
                 <div class="">
                     <p class="tiny-text">Private vaults can only be seen by you</p>
-                    <div class="d-flex justify-content-start gap-3 mb-3">
-                        <input type="checkbox">
+                    <div class="d-flex justify-content-evenly mb-3">
+                        <input type="checkbox" v-modal="editable.isPrivate">
                         <p class="fw-bold">Make Vault Private?</p>
                     </div>
                 </div>
@@ -36,12 +36,24 @@
 
 <script>
 import { ref } from 'vue';
+import { logger } from '../utils/Logger';
+import { Modal } from 'bootstrap';
 
 export default {
     setup(){
         const editable = ref({})
         return {
-            editable
+            editable,
+
+            async createVault() {
+              try {
+                const vaultData = editable.value
+                await vaultsService.createVault(vaultData)
+                editable.value = {}
+              } catch (error) {
+                logger.log('error creating vault', error)
+              }
+            }
         }
     }
 }
