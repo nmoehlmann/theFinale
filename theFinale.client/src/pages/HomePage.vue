@@ -20,7 +20,7 @@ export default {
 
     async function getAllKeeps() {
       try {
-        await keepsService.getAllKeeps(AppState.account.id)
+        await keepsService.getAllKeeps()
       } catch (error) {
         logger.log(error)
         Pop.error(error)

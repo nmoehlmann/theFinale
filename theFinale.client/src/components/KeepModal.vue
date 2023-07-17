@@ -53,7 +53,7 @@ import { computed, ref } from 'vue';
 import { AppState } from '../AppState';
 import Pop from "../utils/Pop.js";
 import { logger } from "../utils/Logger.js";
-import { vaultKeeps } from "../services/VaultKeepsServices.js"
+import { vaultKeepsService } from "../services/VaultKeepsServices.js";
 
 export default {
     setup() {
@@ -67,7 +67,7 @@ export default {
 
             async createVaultKeep() {
                 try {
-                    await vaultKeeps.createVaultKeep(editable.value)
+                    await vaultKeepsService.createVaultKeep(editable.value)
                     editable.value = { vaultId: '' }
                 } catch (error) {
                     Pop.error('error creating vaultKeep')
