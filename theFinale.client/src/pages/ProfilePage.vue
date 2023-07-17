@@ -9,6 +9,12 @@
                 <VaultCard :vault="v" />
             </div>
         </section>
+        <section class="row">
+            <h1>Keeps</h1>
+            <div class="col-4" v-for="k in keeps" :key="k.id">
+                <KeepCard :keep="k" />
+            </div>
+        </section>
     </main>
 </template>
 
@@ -21,6 +27,7 @@ import { profilesService } from '../services/ProfilesService'
 import { computed, onMounted } from 'vue';
 import { AppState } from "../AppState.js";
 import { vaultsService } from "../services/VaultsService.js";
+import { keepsService } from "../services/KeepsService.js";
 
 export default {
     setup() {
@@ -44,6 +51,15 @@ export default {
             }
         }
 
+        async function getUserKeeps() {
+            try {
+                await keepsService.getUserKeeps(route.params.id)
+            } catch (error) {
+                Pop.error('error getting user keeps')
+                logger.log(error)
+            }
+        }
+
         // async function getUserKeeps() {
         //     try {
 
@@ -57,10 +73,12 @@ export default {
         onMounted(() => {
             getProfile()
             getUserVaults()
+            getUserKeeps()
         })
         return {
             profile: computed(() => AppState.profile),
-            vaults: computed(() => AppState.vaults)
+            vaults: computed(() => AppState.vaults),
+            keeps: computed(() => AppState.userKeeps)
         }
     }
 }
