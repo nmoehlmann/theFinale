@@ -22,20 +22,23 @@
                             </div>
                         </section>
                         <section class="row mb-2" v-if="keep.creatorId">
-                            <div class="d-flex justify-content-between">
-                                <!-- TODO add vaults option input -->
-                                <select class="form-control" v-model="editable.vaultId">
-                                    <option disabled selected value="">Choose Vault</option>
-                                    <option v-for="v in vaults" :key="v.id" value="v.id">{{ v.name }}</option>
-                                </select>
-                                <button class="btn btn-dark">Save</button>
-                                <router-link :to="{ name: 'Profile', params: { id: keep?.creatorId } }">
-                                    <div class="d-flex gap-2" data-bs-dismiss="modal">
-                                        <img class="creator-img rounded-circle" :src="keep.creator?.picture" alt="">
-                                        <p>{{ keep?.creator?.name }}</p>
+                            <form @submit.prevent="createVaultKeep()">
+                                <div class="d-flex justify-content-between">
+                                    <div class="d-flex mx-2">
+                                        <select class="vault-options mx-2" v-model="editable.vaultId" required>
+                                            <option disabled selected value="">Choose Vault</option>
+                                            <option v-for="v in vaults" :key="v.id" value="v.id">{{ v.name }}</option>
+                                        </select>
+                                        <button class="btn btn-dark">Save</button>
                                     </div>
-                                </router-link>
-                            </div>
+                                    <router-link :to="{ name: 'Profile', params: { id: keep?.creatorId } }">
+                                        <div class="d-flex gap-2" data-bs-dismiss="modal">
+                                            <img class="creator-img rounded-circle" :src="keep.creator?.picture" alt="">
+                                            <p>{{ keep?.creator?.name }}</p>
+                                        </div>
+                                    </router-link>
+                                </div>
+                            </form>
                         </section>
                     </div>
                 </section>
@@ -48,14 +51,29 @@
 <script>
 import { computed, ref } from 'vue';
 import { AppState } from '../AppState';
+import Pop from "../utils/Pop.js";
+import { logger } from "../utils/Logger.js";
+import { vaultKeeps } from "../services/VaultKeepsServices.js"
 
 export default {
     setup() {
-        const editable = ref({})
+        const editable = ref({ vaultId: '' })
+
         return {
             editable,
             keep: computed(() => AppState.activeKeep),
             keepImg: computed(() => `url(${AppState.activeKeep.img})`),
+            vaults: computed(() => AppState.vaults),
+
+            async createVaultKeep() {
+                try {
+                    await vaultKeeps.createVaultKeep(editable.value)
+                    editable.value = { vaultId: '' }
+                } catch (error) {
+                    Pop.error('error creating vaultKeep')
+                    logger.log(error)
+                }
+            }
         }
     }
 }
@@ -63,6 +81,12 @@ export default {
 
 
 <style lang="scss" scoped>
+.vault-options {
+    outline: none;
+    border: none;
+
+}
+
 .creator-img {
     height: 2rem;
     aspect-ratio: 1/1;
