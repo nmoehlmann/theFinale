@@ -23,6 +23,12 @@ class VaultsService {
         AppState.vaults = res.data.map(v => new Vault(v))
         logger.log(AppState.vaults)
     }
+
+    async getVaultById(vaultId) {
+        const res = await api.get(`api/vaults/${vaultId}`)
+        AppState.activeVault = new Vault(res.data)
+        logger.log(AppState.activeVault)
+    }
 }
 
 export const vaultsService = new VaultsService()

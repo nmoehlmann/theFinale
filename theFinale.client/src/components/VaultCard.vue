@@ -1,9 +1,11 @@
 <template>
-    <main class="elevation-3 vault-img vault-container d-flex align-items-end justify-content-center">
-        <div class="p-2 m-1 text-light title-card">
-            <h1>{{ vault.name }}</h1>
-        </div>
-    </main>
+    <router-link :to="{ name: 'Vault', params: { id: vault.id } }">
+        <main class="elevation-3 vault-img vault-container d-flex align-items-end justify-content-center">
+            <div class="p-2 m-1 text-light title-card">
+                <h1>{{ vault.name }}</h1>
+            </div>
+        </main>
+    </router-link>
 </template>
 
 

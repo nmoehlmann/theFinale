@@ -36,19 +36,20 @@ export default {
       }
     }
 
-    // async function getUserKeeps() {
-    //   try {
-    //     logger.log(AppState.account)
-    //     // await keepsService.getUserKeeps()
-    //   } catch (error) {
-    //     Pop.error(error)
-    //     logger.log('error getting my keeps', error)
-    //   }
-    // }
+    async function getUserKeeps() {
+      try {
+        logger.log(AppState.account)
+        await accountService.getAccount()
+        await keepsService.getUserKeeps(AppState.account.id)
+      } catch (error) {
+        Pop.error(error)
+        logger.log('error getting my keeps', error)
+      }
+    }
 
     onMounted(() => {
       getMyVaults()
-      // getUserKeeps()
+      getUserKeeps()
     })
     return {
       account: computed(() => AppState.account),
