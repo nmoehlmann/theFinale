@@ -21,7 +21,7 @@
                                 <p>{{ keep.description }}</p>
                             </div>
                         </section>
-                        <section class="row mb-2" v-if="keep.creatorId">
+                        <section class="row mb-2" v-if="keep.creatorId && !keep.vaultKeepId">
                             <form @submit.prevent="createVaultKeep(keep.id)">
                                 <div class="d-flex justify-content-between">
                                     <div class="d-flex mx-2">
@@ -30,6 +30,23 @@
                                             <option v-for="v in vaults" :key="v.id" :value="v.id">{{ v.name }}</option>
                                         </select>
                                         <button class="btn btn-dark">Save</button>
+                                    </div>
+                                    <router-link :to="{ name: 'Profile', params: { id: keep?.creatorId } }">
+                                        <div class="d-flex gap-2" data-bs-dismiss="modal">
+                                            <img class="creator-img rounded-circle" :src="keep.creator?.picture" alt="">
+                                            <p>{{ keep?.creator?.name }}</p>
+                                        </div>
+                                    </router-link>
+                                </div>
+                            </form>
+                        </section>
+                        <section class="row mb-2" v-if="keep.creatorId && keep.vaultKeepId">
+                            <form @submit.prevent="deleteVaultKeep(keep.vaultKeepId)">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="remove-button-container">
+                                        <button class="remove-button" type="submit" data-bs-dismiss="'#keepModal'"><i
+                                                class="mdi mdi-cancel"></i>
+                                            Remove</button>
                                     </div>
                                     <router-link :to="{ name: 'Profile', params: { id: keep?.creatorId } }">
                                         <div class="d-flex gap-2" data-bs-dismiss="modal">
@@ -74,6 +91,15 @@ export default {
                     Pop.error('error creating vaultKeep')
                     logger.log(error)
                 }
+            },
+
+            async deleteVaultKeep(vkId) {
+                try {
+                    await vaultKeepsService.deleteVaultKeep(vkId)
+                } catch (error) {
+                    Pop.error('error deleting keep in vault')
+                    logger.log(error)
+                }
             }
         }
     }
@@ -82,6 +108,25 @@ export default {
 
 
 <style lang="scss" scoped>
+.remove-button-container {
+    border-bottom: black solid;
+    opacity: .8;
+}
+
+.remove-button {
+    all: unset;
+    font-size: 1.4rem;
+    cursor: pointer;
+}
+
+.remove-button:hover,
+.remove-button-container:hover {
+    transition-timing-function: ease-in-out;
+    transition: 10ms;
+    color: red;
+    border-bottom: red solid;
+}
+
 .vault-options {
     outline: none;
     border: none;

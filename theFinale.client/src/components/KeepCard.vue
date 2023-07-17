@@ -1,6 +1,6 @@
 <template>
   <main class="d-flex flex-column justify-content-between elevation-3 keep-img p-2" data-bs-toggle="modal"
-    data-bs-target="#keepModal" @click="getKeepById(keep.id)" v-if="keep">
+    data-bs-target="#keepModal" @click="getKeepById(keep.id, keep.vaultKeepId)" v-if="keep">
     <div class="d-flex justify-content-end">
       <img class="rounded-circle pfp" :src="keep?.creator?.picture" alt="">
     </div>
@@ -24,10 +24,10 @@ export default {
   },
   setup(props) {
     return {
-      async getKeepById(keepId) {
+      async getKeepById(keepId, vkId) {
         try {
           logger.log('getting keep')
-          await keepsService.getKeepById(keepId)
+          await keepsService.getKeepById(keepId, vkId)
         } catch (error) {
           logger.log('getting keep by id', error)
         }
@@ -62,4 +62,5 @@ export default {
 p,
 h1 {
   margin: 0;
-}</style>
+}
+</style>
