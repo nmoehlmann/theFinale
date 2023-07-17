@@ -25,15 +25,15 @@ export default {
             }
         }
 
-        async function getUserKeeps() {
-            try {
+        // async function getUserKeeps() {
+        //     try {
                 
-            } catch (error) {
-                Pop.error(error)
-                logger.log('error getting user keeps', error)
-            }
+        //     } catch (error) {
+        //         Pop.error(error)
+        //         logger.log('error getting user keeps', error)
+        //     }
 
-        }
+        // }
 
         onMounted(() => {
             getProfile()
