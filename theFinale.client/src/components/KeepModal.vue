@@ -24,6 +24,10 @@
                         <section class="row mb-2" v-if="keep.creatorId">
                             <div class="d-flex justify-content-between">
                                 <!-- TODO add vaults option input -->
+                                <select class="form-control" v-model="editable.vaultId">
+                                    <option disabled selected value="">Choose Vault</option>
+                                    <option v-for="v in vaults" :key="v.id" value="v.id">{{ v.name }}</option>
+                                </select>
                                 <button class="btn btn-dark">Save</button>
                                 <router-link :to="{ name: 'Profile', params: { id: keep?.creatorId } }">
                                     <div class="d-flex gap-2" data-bs-dismiss="modal">
@@ -42,12 +46,14 @@
 
 
 <script>
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import { AppState } from '../AppState';
 
 export default {
     setup() {
+        const editable = ref({})
         return {
+            editable,
             keep: computed(() => AppState.activeKeep),
             keepImg: computed(() => `url(${AppState.activeKeep.img})`),
         }

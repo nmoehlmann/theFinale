@@ -3,8 +3,8 @@
     <section class="row">
       <div
         class="col-6 offset-3 vault-img d-flex align-items-center justify-content-end text-light flex-column title-text">
-        <h1>{{ vault.name }}</h1>
-        <p>By: {{ vault.creator.name }}</p>
+        <h1>{{ vault?.name }}</h1>
+        <p>By: {{ vault?.creator?.name }}</p>
       </div>
     </section>
     <section class="row">
@@ -53,6 +53,7 @@ export default {
   height: 20rem;
   background-size: fill;
   background-repeat: no-repeat;
+  background-position: center;
   border-radius: 5px;
 }
 

@@ -1,8 +1,10 @@
 <template>
   <main>
-    <div class="col-md-4" v-for="k in keeps" :key="k.id">
-      <KeepCard :keep="k" />
-    </div>
+    <section class="row">
+      <div class="col-md-4" v-for="k in keeps" :key="k.id">
+        <KeepCard :keep="k" />
+      </div>
+    </section>
   </main>
 </template>
 
