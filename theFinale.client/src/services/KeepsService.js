@@ -8,6 +8,7 @@ class KeepsService{
     const res = await api.post('api/keeps', keepData)
     logger.log(res.data, 'keeps res.data')
     AppState.keeps.push(new Keep(res.data))
+    AppState.userKeeps.push(new Keep(res.data))
     logger.log(AppState.keeps, 'keeps appstate')
   }
 
@@ -27,8 +28,8 @@ class KeepsService{
   async getUserKeeps(userId) {
     const res = await api.get(`api/profiles/${userId}/keeps`)
     logger.log(res.data)
-    AppState.keeps = res.data.map(k => new Keep(k))
-    logger.log(AppState.keeps)
+    AppState.userKeeps = res.data.map(k => new Keep(k))
+    logger.log(AppState.userKeeps)
   }
 
 

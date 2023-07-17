@@ -15,7 +15,7 @@
         <KeepCard :keep="k" />
       </div>
     </section>
-    </main>
+  </main>
 </template>
 
 <script>
@@ -53,12 +53,10 @@ export default {
     return {
       account: computed(() => AppState.account),
       vaults: computed(() => AppState.vaults),
-      keeps: computed(() => AppState.keeps)
+      keeps: computed(() => AppState.userKeeps)
     }
   }
 }
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

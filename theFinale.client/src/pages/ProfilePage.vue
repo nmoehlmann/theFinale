@@ -5,6 +5,9 @@
     <main class="container">
         <section class="row">
             <h1>Vaults</h1>
+            <div class="col-4" v-for="v in vaults" :key="v.id">
+                <VaultCard :vault="v" />
+            </div>
         </section>
     </main>
 </template>
@@ -56,7 +59,8 @@ export default {
             getUserVaults()
         })
         return {
-            profile: computed(() => AppState.profile)
+            profile: computed(() => AppState.profile),
+            vaults: computed(() => AppState.vaults)
         }
     }
 }
