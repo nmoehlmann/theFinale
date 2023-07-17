@@ -22,12 +22,12 @@
                             </div>
                         </section>
                         <section class="row mb-2" v-if="keep.creatorId">
-                            <form @submit.prevent="createVaultKeep()">
+                            <form @submit.prevent="createVaultKeep(keep.id)">
                                 <div class="d-flex justify-content-between">
                                     <div class="d-flex mx-2">
                                         <select class="vault-options mx-2" v-model="editable.vaultId" required>
                                             <option disabled selected value="">Choose Vault</option>
-                                            <option v-for="v in vaults" :key="v.id" value="v.id">{{ v.name }}</option>
+                                            <option v-for="v in vaults" :key="v.id" :value="v.id">{{ v.name }}</option>
                                         </select>
                                         <button class="btn btn-dark">Save</button>
                                     </div>
@@ -63,10 +63,11 @@ export default {
             editable,
             keep: computed(() => AppState.activeKeep),
             keepImg: computed(() => `url(${AppState.activeKeep.img})`),
-            vaults: computed(() => AppState.vaults),
+            vaults: computed(() => AppState.myVaults),
 
-            async createVaultKeep() {
+            async createVaultKeep(keepId) {
                 try {
+                    editable.value.keepId = keepId
                     await vaultKeepsService.createVaultKeep(editable.value)
                     editable.value = { vaultId: '' }
                 } catch (error) {

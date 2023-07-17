@@ -6,11 +6,18 @@
         <h1>{{ vault?.name }}</h1>
         <p>By: {{ vault?.creator?.name }}</p>
       </div>
-    </section>
-    <section class="row">
-      <h1>Vault Keeps</h1>
+      <div class="d-flex justify-content-center mt-3 fw-medium fs-3">
+        <p>{{ keeps.length }} Keeps</p>
+      </div>
     </section>
   </header>
+  <main class="container">
+    <section class="row">
+      <div class="col-4" v-for="k in keeps" :key="k.id">
+        <KeepCard :keep="k" />
+      </div>
+    </section>
+  </main>
 </template>
 
 
@@ -21,6 +28,7 @@ import { logger } from "../utils/Logger.js";
 import { computed, onMounted } from "vue";
 import { vaultsService } from "../services/VaultsService.js";
 import { AppState } from "../AppState.js";
+import { vaultKeepsService } from "../services/VaultKeepsServices.js";
 
 export default {
   setup() {
@@ -35,12 +43,23 @@ export default {
       }
     }
 
+    async function getVaultKeeps() {
+      try {
+        await vaultKeepsService.getVaultKeeps(route.params.id)
+      } catch (error) {
+        Pop.error('error getting keeps in vault')
+        logger.log(error)
+      }
+    }
+
     onMounted(() => {
       getVaultById()
+      getVaultKeeps()
     })
     return {
       vault: computed(() => AppState?.activeVault),
-      vaultImg: computed(() => `url(${AppState?.activeVault?.img})`)
+      vaultImg: computed(() => `url(${AppState?.activeVault?.img})`),
+      keeps: computed(() => AppState.keepsInVault)
     }
   }
 }

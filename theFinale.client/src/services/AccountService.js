@@ -10,7 +10,8 @@ class AccountService {
       const res = await api.get('/account')
       const myVaults = await api.get('/account/vaults')
       AppState.account = new Account(res.data)
-      AppState.myVaults = myVaults.map(v => new Vault(v))
+      AppState.myVaults = myVaults.data.map(v => new Vault(v))
+      logger.log('my vaults', AppState.myVaults)
     } catch (err) {
       logger.error('HAVE YOU STARTED YOUR SERVER YET???', err)
     }
