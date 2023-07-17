@@ -1,6 +1,6 @@
 <template>
     <header class="container">
-        <UserHero />
+        <h1>profile page</h1>
     </header>
 </template>
 

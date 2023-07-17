@@ -25,7 +25,7 @@
                             <div class="d-flex justify-content-between">
                                 <!-- TODO add vaults option input -->
                                 <button class="btn btn-dark">Save</button>
-                                <router-link :to="{name: 'Profile', params: {id: keep.creatorId}}">
+                                <router-link :to="{ name: 'Profile', params: { id: keep?.creatorId } }">
                                     <div class="d-flex gap-2" data-bs-dismiss="modal">
                                         <img class="creator-img rounded-circle" :src="keep?.creator?.picture" alt="">
                                         <p>{{ keep?.creator?.name }}</p>
