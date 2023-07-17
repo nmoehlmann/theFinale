@@ -6,6 +6,16 @@
                     <div class="col-lg-6">
                         <div class="keep-img">
                             <!-- img -->
+                            <div class="dropdown options-container" v-if="keep.creatorId == account?.id">
+                                <button class="btn btn-secondary m-1 dropdown-toggle" type="button"
+                                    data-bs-toggle="dropdown">
+                                    Options
+                                </button>
+                                <div class="dropdown-menu">
+                                    <button @click.prevent="deleteKeep(keep.id)"
+                                        class="btn btn-danger delete-button">Delete</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="col-lg-6 d-flex flex-column justify-content-between">
@@ -29,7 +39,7 @@
                                             <option disabled selected value="">Choose Vault</option>
                                             <option v-for="v in vaults" :key="v.id" :value="v.id">{{ v.name }}</option>
                                         </select>
-                                        <button class="btn btn-dark">Save</button>
+                                        <button class="btn btn-dark" data-bs-dismiss="modal">Save</button>
                                     </div>
                                     <router-link :to="{ name: 'Profile', params: { id: keep?.creatorId } }">
                                         <div class="d-flex gap-2" data-bs-dismiss="modal">
@@ -44,7 +54,7 @@
                             <form @submit.prevent="deleteVaultKeep(keep.vaultKeepId)">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="remove-button-container">
-                                        <button class="remove-button" type="submit" data-bs-dismiss="'#keepModal'"><i
+                                        <button class="remove-button" type="submit" data-bs-dismiss="modal"><i
                                                 class="mdi mdi-cancel"></i>
                                             Remove</button>
                                     </div>
@@ -71,6 +81,8 @@ import { AppState } from '../AppState';
 import Pop from "../utils/Pop.js";
 import { logger } from "../utils/Logger.js";
 import { vaultKeepsService } from "../services/VaultKeepsServices.js";
+import { keepsService } from "../services/KeepsService.js";
+import { Modal } from "bootstrap";
 
 export default {
     setup() {
@@ -81,6 +93,7 @@ export default {
             keep: computed(() => AppState.activeKeep),
             keepImg: computed(() => `url(${AppState.activeKeep.img})`),
             vaults: computed(() => AppState.myVaults),
+            account: computed(() => AppState.account),
 
             async createVaultKeep(keepId) {
                 try {
@@ -100,6 +113,19 @@ export default {
                     Pop.error('error deleting keep in vault')
                     logger.log(error)
                 }
+            },
+
+            async deleteKeep(keepId) {
+                try {
+                    if (await Pop.confirm('Are you sure you want to permanently delete your keep!')) {
+                        await keepsService.deleteKeep(keepId)
+                        Modal.getOrCreateInstance('#keepModal').hide()
+                        Pop.success("Keep has been deleted")
+                    }
+                } catch (error) {
+                    Pop.error('error deleting keep')
+                    logger.log(error)
+                }
             }
         }
     }
@@ -108,6 +134,15 @@ export default {
 
 
 <style lang="scss" scoped>
+.delete-button {
+    position: relative;
+    left: 2.5rem;
+}
+
+.options-container {
+    color: red;
+}
+
 .remove-button-container {
     border-bottom: black solid;
     opacity: .8;

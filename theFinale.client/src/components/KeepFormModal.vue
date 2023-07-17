@@ -17,8 +17,11 @@
               <span class="required">*</span>
             </div>
             <div class="mb-3 d-flex flex-column align-items-center">
-              <label for="description"><p class="fs-5">Keep Description</p></label>
-              <textarea name="description" class="description" cols="30" rows="10" v-model="editable.description" required minlength="2"></textarea>
+              <label for="description">
+                <p class="fs-5">Keep Description</p>
+              </label>
+              <textarea name="description" class="description" cols="30" rows="10" v-model="editable.description" required
+                minlength="2"></textarea>
             </div>
             <div class="d-flex justify-content-end">
               <button type="submit" class="btn btn-dark">Create</button>
@@ -51,6 +54,7 @@ export default {
           await keepsService.createKeep(keepData)
           editable.value = {}
           Modal.getOrCreateInstance('#keepForm').hide()
+          Pop.success('Created Keep')
         } catch (error) {
           Pop.error(error)
         }
@@ -62,26 +66,25 @@ export default {
 
 
 <style lang="scss" scoped>
+.required {
+  color: red;
+}
 
-  .required {
-    color: red;
-  }
+p,
+h1 {
+  margin: 0;
+}
 
-  p, h1 {
-    margin: 0;
-  }
+.input {
+  width: 100%;
+  border-bottom: solid;
+}
 
-  .input {
-    width: 100%;
-    border-bottom: solid;
-  }
+input {
+  all: unset;
+  width: 100%
+}
 
-  input {
-    all: unset;
-    width: 100%
-  }
-
-  .description {
-    width: 100%;
-  }
-</style>
+.description {
+  width: 100%;
+}</style>
