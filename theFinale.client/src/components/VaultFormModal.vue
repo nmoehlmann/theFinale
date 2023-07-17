@@ -17,18 +17,21 @@
               <span class="required">*</span>
             </div>
             <div class="mb-3 d-flex flex-column align-items-center">
-              <label for="description"><p class="fs-5">Vault Description</p></label>
-              <textarea name="description" class="description" cols="30" rows="3" v-model="editable.description" required minlength="2"></textarea>
+              <label for="description">
+                <p class="fs-5">Vault Description</p>
+              </label>
+              <textarea name="description" class="description" cols="30" rows="3" v-model="editable.description" required
+                minlength="2"></textarea>
             </div>
             <div class="col-6 offset-6 d-flex justify-content-end flex-column">
-                <div class="">
-                    <p class="tiny-text">Private vaults can only be seen by you</p>
-                    <div class="d-flex justify-content-evenly mb-3">
-                        <input type="checkbox" v-modal="editable.isPrivate">
-                        <p class="fw-bold">Make Vault Private?</p>
-                    </div>
+              <div class="">
+                <p class="tiny-text">Private vaults can only be seen by you</p>
+                <div class="d-flex justify-content-evenly mb-3">
+                  <input type="checkbox" v-modal="editable.isPrivate">
+                  <p class="fw-bold">Make Vault Private?</p>
                 </div>
-                <button type="submit" class="btn btn-dark">Create Vault</button>
+              </div>
+              <button type="submit" class="btn btn-dark">Create Vault</button>
             </div>
           </section>
         </form>
@@ -43,52 +46,54 @@ import { ref } from 'vue';
 import { logger } from '../utils/Logger';
 import { Modal } from 'bootstrap';
 import { vaultsService } from '../services/VaultsService';
+import Pop from "../utils/Pop.js";
 
 export default {
-    setup(){
-        const editable = ref({})
-        return {
-            editable,
+  setup() {
+    const editable = ref({})
+    return {
+      editable,
 
-            async createVault() {
-              try {
-                const vaultData = editable.value
-                await vaultsService.createVault(vaultData)
-                editable.value = {}
-              } catch (error) {
-                logger.log('error creating vault', error)
-              }
-            }
+      async createVault() {
+        try {
+          const vaultData = editable.value
+          await vaultsService.createVault(vaultData)
+          editable.value = {}
+          Pop.success("Created Vault")
+        } catch (error) {
+          logger.log('error creating vault', error)
         }
+      }
     }
+  }
 }
 </script>
 
 
 <style lang="scss" scoped>
-
-    .tiny-text {
-        font-size: .80rem;
-    }
-    .required {
-    color: red;
+.tiny-text {
+  font-size: .80rem;
 }
 
-  p, h1 {
-    margin: 0;
-  }
+.required {
+  color: red;
+}
 
-  .input {
-    width: 100%;
-    border-bottom: solid;
-  }
+p,
+h1 {
+  margin: 0;
+}
 
-  .input-text {
-    all: unset;
-    width: 100%
-  }
+.input {
+  width: 100%;
+  border-bottom: solid;
+}
 
-  .description {
-    width: 100%;
-  }
-</style>
+.input-text {
+  all: unset;
+  width: 100%
+}
+
+.description {
+  width: 100%;
+}</style>

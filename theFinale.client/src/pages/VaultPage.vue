@@ -7,7 +7,15 @@
         <p>By: {{ vault?.creator?.name }}</p>
       </div>
       <div class="d-flex justify-content-center mt-3 fw-medium fs-3">
-        <p>{{ keeps.length }} Keeps</p>
+        <p class="keep-count">{{ keeps.length }} Keeps</p>
+        <div class="dropdown options">
+          <button class="btn fs-2 fw-medium" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            ...
+          </button>
+          <ul class="dropdown-menu">
+            <li><a @click.prevent="deleteVault()" class="dropdown-item" href="#">Delete Vault</a></li>
+          </ul>
+        </div>
       </div>
     </section>
   </header>
@@ -29,6 +37,7 @@ import { computed, onMounted } from "vue";
 import { vaultsService } from "../services/VaultsService.js";
 import { AppState } from "../AppState.js";
 import { vaultKeepsService } from "../services/VaultKeepsServices.js";
+import { router } from "../router.js";
 
 export default {
   setup() {
@@ -59,7 +68,20 @@ export default {
     return {
       vault: computed(() => AppState?.activeVault),
       vaultImg: computed(() => `url(${AppState?.activeVault?.img})`),
-      keeps: computed(() => AppState.keepsInVault)
+      keeps: computed(() => AppState.keepsInVault),
+
+      async deleteVault() {
+        try {
+          if (await Pop.confirm("Are you sure you want to delete this Vault?")) {
+            await vaultsService.deleteVault(route.params.id)
+            router.push({ name: 'Home' })
+            Pop.success("Deleted Vault")
+          }
+        } catch (error) {
+          Pop.error('error deleting vault')
+          logger.log(error)
+        }
+      }
     }
   }
 }
@@ -67,6 +89,17 @@ export default {
 
 
 <style lang="scss" scoped>
+.keep-count {
+  position: relative;
+  left: 2rem;
+}
+
+.options {
+  position: relative;
+  left: 11rem;
+  bottom: .5rem;
+}
+
 .vault-img {
   background-image: v-bind(vaultImg);
   height: 20rem;
