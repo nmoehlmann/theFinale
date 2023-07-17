@@ -1,5 +1,6 @@
 <template>
-  <main class="d-flex flex-column justify-content-between elevation-3 keep-img p-2" data-bs-toggle="modal" data-bs-target="#keepModal" @click="getKeepById(keep.id)">
+  <main class="d-flex flex-column justify-content-between elevation-3 keep-img p-2" data-bs-toggle="modal"
+    data-bs-target="#keepModal" @click="getKeepById(keep.id)" v-if="keep">
     <div class="d-flex justify-content-end">
       <img class="rounded-circle pfp" :src="keep?.creator?.picture" alt="">
     </div>
@@ -39,25 +40,26 @@ export default {
 
 
 <style lang="scss" scoped>
-  .keep-img {
-    background-image: v-bind(keepImg);
-    height: 15rem;
-    margin-bottom: 2rem;;
-  }
+.keep-img {
+  background-image: v-bind(keepImg);
+  height: 15rem;
+  margin-bottom: 2rem;
+  ;
+}
 
-  .pfp {
-    height: 3.5rem;
-  }
+.pfp {
+  height: 3.5rem;
+}
 
-  .title-card {
-    background: rgba(0, 0, 0, 0.41);
-    border-radius: 16px;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(13.9px);
-    -webkit-backdrop-filter: blur(13.9px);
-  }
+.title-card {
+  background: rgba(0, 0, 0, 0.41);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(13.9px);
+  -webkit-backdrop-filter: blur(13.9px);
+}
 
-  p, h1 {
-    margin: 0;
-  }
-</style>
+p,
+h1 {
+  margin: 0;
+}</style>

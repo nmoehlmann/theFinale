@@ -1,7 +1,12 @@
 <template>
     <header class="container">
-        <h1>profile page</h1>
+        <UserHero :account="profile" />
     </header>
+    <main class="container">
+        <section class="row">
+            <h1>Vaults</h1>
+        </section>
+    </main>
 </template>
 
 
@@ -9,11 +14,13 @@
 import { useRoute } from 'vue-router';
 import Pop from '../utils/Pop';
 import { logger } from '../utils/Logger';
-import {profilesService} from '../services/ProfilesService'
-import { onMounted } from 'vue';
+import { profilesService } from '../services/ProfilesService'
+import { computed, onMounted } from 'vue';
+import { AppState } from "../AppState.js";
+import { vaultsService } from "../services/VaultsService.js";
 
 export default {
-    setup(){
+    setup() {
         const route = useRoute()
 
         async function getProfile() {
@@ -25,9 +32,18 @@ export default {
             }
         }
 
+        async function getUserVaults() {
+            try {
+                await vaultsService.getUserVaults(route.params.id)
+            } catch (error) {
+                Pop.error('couldnt get user vaults', error)
+                logger.log(error)
+            }
+        }
+
         // async function getUserKeeps() {
         //     try {
-                
+
         //     } catch (error) {
         //         Pop.error(error)
         //         logger.log('error getting user keeps', error)
@@ -37,13 +53,14 @@ export default {
 
         onMounted(() => {
             getProfile()
+            getUserVaults()
         })
-        return {}
+        return {
+            profile: computed(() => AppState.profile)
+        }
     }
 }
 </script>
 
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

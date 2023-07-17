@@ -21,13 +21,13 @@
                                 <p>{{ keep.description }}</p>
                             </div>
                         </section>
-                        <section class="row mb-2">
+                        <section class="row mb-2" v-if="keep.creatorId">
                             <div class="d-flex justify-content-between">
                                 <!-- TODO add vaults option input -->
                                 <button class="btn btn-dark">Save</button>
                                 <router-link :to="{ name: 'Profile', params: { id: keep?.creatorId } }">
                                     <div class="d-flex gap-2" data-bs-dismiss="modal">
-                                        <img class="creator-img rounded-circle" :src="keep?.creator?.picture" alt="">
+                                        <img class="creator-img rounded-circle" :src="keep.creator?.picture" alt="">
                                         <p>{{ keep?.creator?.name }}</p>
                                     </div>
                                 </router-link>
@@ -46,7 +46,7 @@ import { computed } from 'vue';
 import { AppState } from '../AppState';
 
 export default {
-    setup(){
+    setup() {
         return {
             keep: computed(() => AppState.activeKeep),
             keepImg: computed(() => `url(${AppState.activeKeep.img})`),
@@ -57,20 +57,20 @@ export default {
 
 
 <style lang="scss" scoped>
+.creator-img {
+    height: 2rem;
+    aspect-ratio: 1/1;
+}
 
-    .creator-img {
-        height: 2rem;
-        aspect-ratio: 1/1;
-    }
-    .keep-img {
-        background-image: v-bind(keepImg);
-        height: 30rem;
-        background-position: center;
-        background-size: contain;
-        background-repeat: no-repeat;
-    }
+.keep-img {
+    background-image: v-bind(keepImg);
+    height: 30rem;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
 
-    p {
-        margin: 0;
-    }
+p {
+    margin: 0;
+}
 </style>
