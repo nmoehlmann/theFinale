@@ -10,7 +10,6 @@ class AccountService {
     try {
       const res = await api.get('/account')
       AppState.account = new Account(res.data)
-      await keepsService.getUserKeeps(AppState.account.id)
     } catch (err) {
       logger.error('HAVE YOU STARTED YOUR SERVER YET???', err)
     }

@@ -10,14 +10,16 @@
 <script>
 import { computed } from 'vue';
 import { Vault } from '../models/Vault';
+import { AppState } from "../AppState.js";
 
 export default {
     props: {
-        vault: {type: Vault, required: true}
+        vault: { type: Vault, required: true }
     },
-    setup(props){
+    setup(props) {
         return {
-            vaultImg: computed(() => `url(${props.vault?.img})`)
+            vaultImg: computed(() => `url(${props.vault?.img})`),
+            vaults: computed(() => AppState.vaults)
         }
     }
 }
@@ -25,22 +27,22 @@ export default {
 
 
 <style lang="scss" scoped>
-    .vault-img {
-        background-image: v-bind(vaultImg);
-        background-position: center;
-        background-size: cover;
-    }
+.vault-img {
+    background-image: v-bind(vaultImg);
+    background-position: center;
+    background-size: cover;
+}
 
-    .vault-container {
-        height: 15rem;
-        margin-bottom: 1.5rem;
-    }
+.vault-container {
+    height: 15rem;
+    margin-bottom: 1.5rem;
+}
 
-    .title-card {
-        background: rgba(0, 0, 0, 0.41);
-        border-radius: 16px;
-        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-        backdrop-filter: blur(13.9px);
-        -webkit-backdrop-filter: blur(13.9px);
-    }
+.title-card {
+    background: rgba(0, 0, 0, 0.41);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(13.9px);
+    -webkit-backdrop-filter: blur(13.9px);
+}
 </style>
