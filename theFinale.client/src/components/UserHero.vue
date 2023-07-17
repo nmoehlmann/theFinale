@@ -5,6 +5,7 @@
             <div class="d-flex flex-column align-items-center pfp-container">
                 <img class="pfp" :src="account.picture" alt="">
                 <h1>{{ account.name }}</h1>
+                <!-- TODO accounts keeps and vaults displayed -->
             </div>
         </div>
     </main>
