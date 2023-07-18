@@ -17,24 +17,29 @@ namespace theFinale.Services
 
     internal Vault DeleteVault(int vaultId, string userId)
     {
-      Vault foundVault = GetVaultById(vaultId);
-      if(foundVault.creatorId != userId) throw new Exception("Unauthorized to delete vault");
+      Vault foundVault = GetVaultById(vaultId, userId);
+      if (foundVault.creatorId != userId) throw new Exception("Unauthorized to delete vault");
 
       int rows = _repo.DeleteVault(vaultId);
       return foundVault;
     }
 
-    internal Vault GetVaultById(int vaultId)
+    internal Vault GetVaultById(int vaultId, string userId)
     {
       Vault vault = _repo.GetVaultById(vaultId);
       if (vault == null) throw new Exception("Invalid Id");
-      if (vault.isPrivate == true) throw new Exception("This vault is private");
+
+      if (vault.isPrivate == true && userId != vault.creatorId)
+      {
+        throw new Exception("This vault is private and you are not the owner!");
+      }
+
       return vault;
     }
 
     internal Vault updateVault(Vault updateData, string userId, int vaultId)
     {
-      Vault foundVault = GetVaultById(vaultId);
+      Vault foundVault = GetVaultById(vaultId, userId);
       updateData.creatorId = foundVault.creatorId;
 
       if (updateData.creatorId != userId) throw new Exception("Unauthorized to edit this vault");

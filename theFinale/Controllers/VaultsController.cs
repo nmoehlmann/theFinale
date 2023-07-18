@@ -35,11 +35,13 @@ namespace theFinale.Controllers
     }
 
     [HttpGet("{vaultId}")]
-    public ActionResult<Vault> GetVaultById(int vaultId)
+    public async Task<ActionResult<Vault>> GetVaultById(int vaultId)
     {
       try
       {
-        Vault vault = _vs.GetVaultById(vaultId);
+        Account userInfo = await _auth.GetUserInfoAsync<Account>(HttpContext);
+
+        Vault vault = _vs.GetVaultById(vaultId, userInfo?.Id);
         return Ok(vault);
       }
       catch (Exception e)
@@ -74,7 +76,7 @@ namespace theFinale.Controllers
       {
         Account userInfo = await _auth.GetUserInfoAsync<Account>(HttpContext);
 
-        Vault deletedVault = _vs.DeleteVault(vaultId, userInfo.Id);
+        Vault deletedVault = _vs.DeleteVault(vaultId, userInfo?.Id);
         return Ok(deletedVault);
       }
       catch (Exception e)
@@ -84,12 +86,14 @@ namespace theFinale.Controllers
     }
 
     [HttpGet("{vaultId}/keeps")]
-    public ActionResult<List<vk>> GetVksByVaultId(int vaultId)
+    public async Task<ActionResult<List<vk>>> GetVksByVaultId(int vaultId)
     {
       try
       {
-        Vault vault = _vs.GetVaultById(vaultId);
-        List<vk> vks = _vks.GetVksByVaultId(vaultId, vault);
+        Account userInfo = await _auth.GetUserInfoAsync<Account>(HttpContext);
+
+        Vault vault = _vs.GetVaultById(vaultId, userInfo?.Id);
+        List<vk> vks = _vks.GetVksByVaultId(vaultId, vault, userInfo?.Id);
         return Ok(vks);
       }
       catch (Exception e)
