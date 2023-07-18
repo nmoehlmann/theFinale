@@ -55,6 +55,7 @@ export default {
 
         async function getUserKeeps() {
             try {
+                AppState.page = "profile"
                 await keepsService.getUserKeeps(route.params.id)
             } catch (error) {
                 Pop.error('error getting user keeps')

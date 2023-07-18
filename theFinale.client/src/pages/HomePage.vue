@@ -23,6 +23,8 @@ export default {
     async function getAllKeeps() {
       try {
         await keepsService.getAllKeeps()
+        AppState.page = "home"
+        logger.log(AppState.page)
       } catch (error) {
         logger.log(error)
         Pop.error(error)

@@ -14,7 +14,7 @@
       <img class="keep-img img-fluid" :src="keep.img" alt="">
       <div class="keep-details p-2">
         <section class="d-flex flex-column align-items-start">
-          <img class="rounded-circle pfp" :src="keep?.creator?.picture" alt="">
+          <img class="rounded-circle pfp" :src="keep?.creator?.picture" alt="" v-if="page == 'home'">
           <div class="title-card text-light">
             <h1>{{ keep.name }}</h1>
           </div>
@@ -28,9 +28,9 @@
 <script>
 import { computed } from "vue";
 import { Keep } from "../models/Keep.js";
-import { AppState } from "../AppState.js";
 import { logger } from "../utils/Logger";
 import { keepsService } from "../services/KeepsService";
+import { AppState } from "../AppState.js";
 
 export default {
   props: {
@@ -46,7 +46,8 @@ export default {
           logger.log('getting keep by id', error)
         }
       },
-      keepImg: computed(() => `url(${props.keep?.img})`)
+      keepImg: computed(() => `url(${props.keep?.img})`),
+      page: computed(() => AppState.page)
     }
   }
 }

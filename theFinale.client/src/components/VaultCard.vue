@@ -2,7 +2,7 @@
     <router-link :to="{ name: 'Vault', params: { id: vault.id } }">
         <main class="elevation-3 vault-img vault-container d-flex flex-column justify-content-between">
             <div>
-                <i class="mdi mdi-lock locked" v-if="checkPrivate(vault.id)"></i>
+                <i title="Private Vault" class="mdi mdi-lock locked" v-if="checkPrivate(vault.id)"></i>
             </div>
             <div class="p-2 m-1 text-light title-card">
                 <h1>{{ vault.name }}</h1>
@@ -55,6 +55,7 @@ export default {
 .vault-container {
     height: 15rem;
     margin-bottom: 1.5rem;
+    border-radius: 5px;
 }
 
 .title-card {

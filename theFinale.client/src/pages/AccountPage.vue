@@ -40,6 +40,8 @@ export default {
 
     async function getUserKeeps() {
       try {
+        AppState.page = "account"
+        logger.log(AppState.page)
         logger.log(AppState.account)
         await accountService.getAccount()
         await keepsService.getUserKeeps(AppState.account.id)

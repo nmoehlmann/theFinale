@@ -17,6 +17,11 @@
   <Modal id="vaultForm" class="modal instant" tabindex="-1" role="dialog">
     <VaultFormModal />
   </Modal>
+
+  <section class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="true" tabindex="-1"
+    id="profileEditor">
+    <ProfileEditor :account="account" />
+  </section>
 </template>
 
 <script>
@@ -27,7 +32,8 @@ import Navbar from './components/Navbar.vue'
 export default {
   setup() {
     return {
-      appState: computed(() => AppState)
+      appState: computed(() => AppState),
+      account: computed(() => AppState?.account)
     }
   },
   components: { Navbar }
