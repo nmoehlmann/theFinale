@@ -7,8 +7,7 @@
                     Profile Editor
                 </button>
             </div>
-            <img class="coverImg img-fluid"
-                src="https://codetheweb.blog/assets/img/posts/css-advanced-background-images/cover.jpg" alt="">
+            <img class="coverImg img-fluid" :src="account.coverImg" alt="">
             <div class="d-flex flex-column align-items-center pfp-container">
                 <img class="pfp" :src="account?.picture" alt="">
                 <h1>{{ account.name }}</h1>

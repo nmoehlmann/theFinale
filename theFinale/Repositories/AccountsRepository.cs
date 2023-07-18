@@ -44,9 +44,9 @@ public class AccountsRepository
     return update;
   }
 
-    internal List<Vault> GetMyVaults(string userId)
-    {
-        string sql = @"
+  internal List<Vault> GetMyVaults(string userId)
+  {
+    string sql = @"
         SELECT
         v.*,
         act.*
@@ -55,11 +55,24 @@ public class AccountsRepository
         WHERE v.creatorId = @userId
         ;";
 
-        List<Vault> vaults = _db.Query<Vault, Account, Vault>(sql, (vault, creator) => {
-          vault.creator = creator;
-          return vault;
-        }, new {userId}).ToList();
-        return vaults;
-    }
+    List<Vault> vaults = _db.Query<Vault, Account, Vault>(sql, (vault, creator) =>
+    {
+      vault.creator = creator;
+      return vault;
+    }, new { userId }).ToList();
+    return vaults;
+  }
+
+  internal void UpdateAccount(Account updateData)
+  {
+    string sql = @"
+    UPDATE accounts SET
+    name = @name,
+    picture = @picture,
+    email = @email,
+    coverImg = @coverImg
+    ;";
+    _db.Execute(sql, updateData);
+  }
 }
 

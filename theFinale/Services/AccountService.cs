@@ -37,4 +37,24 @@ public class AccountService
     List<Vault> vaults = _repo.GetMyVaults(userId);
     return vaults;
   }
+
+  internal Account UpdateAccount(Account updateData, string accountId)
+  {
+    Account foundAccount = _repo.GetById(accountId);
+
+    Account original = foundAccount;
+
+    original.Name = updateData.Name != null ? updateData.Name : original.Name;
+
+    original.Picture = updateData.Picture != null ? updateData.Picture : original.Picture;
+
+    original.Email = updateData.Email != null ? updateData.Email : original.Email;
+
+    original.coverImg = updateData.coverImg != null ? updateData.coverImg : original.coverImg;
+
+    _repo.UpdateAccount(original);
+    return original;
+
+
+  }
 }
