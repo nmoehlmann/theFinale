@@ -8,11 +8,17 @@
       <h1>{{ keep.name }}</h1>
     </div>
   </main> -->
-  <main>
-    <div class="">
+  <main class="shadow" data-bs-toggle="modal" data-bs-target="#keepModal" @click="getKeepById(keep.id, keep.vaultKeepId)"
+    v-if="keep">
+    <div class="keep-backgroundImg">
       <img class="keep-img img-fluid" :src="keep.img" alt="">
-      <div class="keep-details">
-        <h1>HI</h1>
+      <div class="keep-details p-2">
+        <section class="d-flex flex-column align-items-start">
+          <img class="rounded-circle pfp" :src="keep?.creator?.picture" alt="">
+          <div class="title-card text-light">
+            <h1>{{ keep.name }}</h1>
+          </div>
+        </section>
       </div>
     </div>
   </main>
@@ -48,19 +54,26 @@ export default {
 
 
 <style lang="scss" scoped>
-
 .keep-backgroundImg {
   background-image: v-bind(keepImg);
-  margin-bottom: 2rem;
   width: 100%;
+  background-size: cover;
+  margin-bottom: 1rem;
+  border-radius: 5px;
 }
+
 .keep-details {
-  // position: relative;
-  // bottom: 5rem;
+  display: inline-block;
+}
+
+.keep-img {
+  visibility: hidden;
+  border-radius: 5px;
 }
 
 .pfp {
-  height: 3.5rem;
+  height: 2.5rem;
+  margin-bottom: 1rem;
 }
 
 .title-card {
@@ -69,6 +82,7 @@ export default {
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(13.9px);
   -webkit-backdrop-filter: blur(13.9px);
+  padding: .25rem;
 }
 
 p,
