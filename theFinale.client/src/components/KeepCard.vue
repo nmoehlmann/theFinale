@@ -1,11 +1,19 @@
 <template>
-  <main class="d-flex flex-column justify-content-between elevation-3 keep-img p-2" data-bs-toggle="modal"
+  <!-- <main class="d-flex flex-column justify-content-between elevation-3 keep-img p-2" data-bs-toggle="modal"
     data-bs-target="#keepModal" @click="getKeepById(keep.id, keep.vaultKeepId)" v-if="keep">
     <div class="d-flex justify-content-end">
       <img class="rounded-circle pfp" :src="keep?.creator?.picture" alt="">
     </div>
     <div class="d-flex justify-content-start title-card text-light p-2 mx-2">
       <h1>{{ keep.name }}</h1>
+    </div>
+  </main> -->
+  <main>
+    <div class="">
+      <img class="keep-img img-fluid" :src="keep.img" alt="">
+      <div class="keep-details">
+        <h1>HI</h1>
+      </div>
     </div>
   </main>
 </template>
@@ -40,11 +48,15 @@ export default {
 
 
 <style lang="scss" scoped>
-.keep-img {
+
+.keep-backgroundImg {
   background-image: v-bind(keepImg);
-  height: 15rem;
   margin-bottom: 2rem;
-  ;
+  width: 100%;
+}
+.keep-details {
+  // position: relative;
+  // bottom: 5rem;
 }
 
 .pfp {

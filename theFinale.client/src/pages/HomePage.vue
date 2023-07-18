@@ -1,8 +1,10 @@
 <template>
-  <main>
+  <main class="d-flex justify-content-center">
     <section class="row">
-      <div class="col-md-4" v-for="k in keeps" :key="k.id">
-        <KeepCard :keep="k" />
+      <div class="keep-container">
+        <div class="keep-card" v-for="k in keeps" :key="k.id">
+          <KeepCard :keep="k" />
+        </div>
       </div>
     </section>
   </main>
@@ -27,6 +29,7 @@ export default {
       }
     }
 
+
     onMounted(() => {
       getAllKeeps()
     })
@@ -37,4 +40,11 @@ export default {
 }
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+
+.keep-container {
+  column-count: 4;
+  padding-left: 10rem;
+  padding-right: 10rem;
+}
+</style>
