@@ -27,7 +27,8 @@
               <div class="">
                 <p class="tiny-text">Private vaults can only be seen by you</p>
                 <div class="d-flex justify-content-evenly mb-3">
-                  <input type="checkbox" v-modal="editable.isPrivate">
+                  <input @onchange="editable.isPrivate != editable.isPrivate" type="checkbox"
+                    v-model="editable.isPrivate">
                   <p class="fw-bold">Make Vault Private?</p>
                 </div>
               </div>
@@ -59,6 +60,7 @@ export default {
           const vaultData = editable.value
           await vaultsService.createVault(vaultData)
           editable.value = {}
+          Modal.getOrCreateInstance('#vaultForm').hide()
           Pop.success("Created Vault")
         } catch (error) {
           logger.log('error creating vault', error)
@@ -96,4 +98,5 @@ h1 {
 
 .description {
   width: 100%;
-}</style>
+}
+</style>

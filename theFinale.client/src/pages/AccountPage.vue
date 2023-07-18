@@ -9,10 +9,12 @@
         <VaultCard :vault="v" />
       </div>
     </section>
-    <section class="row">
+    <section class="">
       <h1>Keeps</h1>
-      <div class="col-4" v-for="k in keeps" :key="k.id">
-        <KeepCard :keep="k" />
+      <div class="keep-container">
+        <div class="" v-for="k in keeps" :key="k.id">
+          <KeepCard :keep="k" />
+        </div>
       </div>
     </section>
   </main>
@@ -60,4 +62,34 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style scoped lang="scss">
+.keep-container {
+  column-count: 4;
+  // padding-left: 5rem;
+  // padding-right: 5rem;
+}
+
+@media(max-width: 1000px) {
+  .keep-container {
+    column-count: 3;
+    // padding-left: 2rem;
+    // padding-right: 2rem;
+  }
+}
+
+@media(max-width: 768px) {
+  .keep-container {
+    column-count: 2;
+    // padding-left: 1rem;
+    // padding-right: 1rem;
+  }
+}
+
+@media(max-width: 420px) {
+  .keep-container {
+    column-count: 1;
+    // padding-left: 1rem;
+    // padding-right: 1rem;
+  }
+}
+</style>

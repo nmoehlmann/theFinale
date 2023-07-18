@@ -8,8 +8,8 @@
       <h1>{{ keep.name }}</h1>
     </div>
   </main> -->
-  <main class="shadow" data-bs-toggle="modal" data-bs-target="#keepModal" @click="getKeepById(keep.id, keep.vaultKeepId)"
-    v-if="keep">
+  <main class="elevation-3" data-bs-toggle="modal" data-bs-target="#keepModal"
+    @click="getKeepById(keep.id, keep.vaultKeepId)" v-if="keep">
     <div class="keep-backgroundImg">
       <img class="keep-img img-fluid" :src="keep.img" alt="">
       <div class="keep-details p-2">

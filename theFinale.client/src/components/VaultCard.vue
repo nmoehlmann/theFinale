@@ -1,6 +1,9 @@
 <template>
     <router-link :to="{ name: 'Vault', params: { id: vault.id } }">
-        <main class="elevation-3 vault-img vault-container d-flex align-items-end justify-content-center">
+        <main class="elevation-3 vault-img vault-container d-flex flex-column justify-content-between">
+            <div>
+                <i class="mdi mdi-lock locked" v-if="checkPrivate(vault.id)"></i>
+            </div>
             <div class="p-2 m-1 text-light title-card">
                 <h1>{{ vault.name }}</h1>
             </div>
@@ -21,7 +24,16 @@ export default {
     setup(props) {
         return {
             vaultImg: computed(() => `url(${props.vault?.img})`),
-            vaults: computed(() => AppState.vaults)
+            vaults: computed(() => AppState.vaults),
+
+            checkPrivate(vaultId) {
+                let vault = AppState.vaults.find(v => v.id == vaultId)
+                if (vault.isPrivate == true) {
+                    return true
+                } else {
+                    return false
+                }
+            }
         }
     }
 }
@@ -29,6 +41,11 @@ export default {
 
 
 <style lang="scss" scoped>
+.locked {
+    color: red;
+    font-size: 2rem;
+}
+
 .vault-img {
     background-image: v-bind(vaultImg);
     background-position: center;

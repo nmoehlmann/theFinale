@@ -1,17 +1,17 @@
 namespace theFinale.Repositories
 {
-    public class ProfilesRepository
+  public class ProfilesRepository
+  {
+    private readonly IDbConnection _db;
+
+    public ProfilesRepository(IDbConnection db)
     {
-        private readonly IDbConnection _db;
+      _db = db;
+    }
 
-        public ProfilesRepository(IDbConnection db)
-        {
-            _db = db;
-        }
-
-        internal List<Keep> GetUserKeeps(string profileId)
-        {
-            string sql = @"
+    internal List<Keep> GetUserKeeps(string profileId)
+    {
+      string sql = @"
             SELECT
             k.*,
             act.*
@@ -20,26 +20,27 @@ namespace theFinale.Repositories
             WHERE k.creatorId = @profileId
             ;";
 
-            List<Keep> keeps = _db.Query<Keep, Account, Keep>(sql, (keep, creator) => {
-                keep.creator = creator;
-                return keep;
-            }, new {profileId}).ToList();
-            return keeps;
-        }
+      List<Keep> keeps = _db.Query<Keep, Account, Keep>(sql, (keep, creator) =>
+      {
+        keep.creator = creator;
+        return keep;
+      }, new { profileId }).ToList();
+      return keeps;
+    }
 
-        internal Profile GetUserProfile(string profileId)
-        {
-            string sql = @"
+    internal Profile GetUserProfile(string profileId)
+    {
+      string sql = @"
             SELECT * FROM accounts WHERE id = @profileId
             ;";
 
-            Profile profile = _db.Query<Profile>(sql, new {profileId}).FirstOrDefault();
-            return profile;
-        }
+      Profile profile = _db.Query<Profile>(sql, new { profileId }).FirstOrDefault();
+      return profile;
+    }
 
-        internal List<Vault> GetUserVaults(string profileId)
-        {
-            string sql = @"
+    internal List<Vault> GetUserVaults(string profileId, string userId)
+    {
+      string sql = @"
             SELECT
             v.*,
             act.*
@@ -48,12 +49,14 @@ namespace theFinale.Repositories
             WHERE v.creatorId = @profileId
             ;";
 
-            List<Vault> vaults = _db.Query<Vault, Account, Vault>(sql, (vault, creator) => {
-                vault.creator = creator;
-                return vault;
-            }, new {profileId}).ToList();
-            return vaults;
-        }
+      List<Vault> vaults = _db.Query<Vault, Account, Vault>(sql, (vault, creator) =>
+      {
+        vault.creator = creator;
+        return vault;
+      }, new { profileId }).ToList();
+      vaults = vaults.FindAll(v => v.isPrivate == false || v.creatorId == userId);
+      return vaults;
     }
+  }
 
 }
