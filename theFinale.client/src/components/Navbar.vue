@@ -1,5 +1,5 @@
 <template>
-  <nav class="container-fluid">
+  <nav class="container-fluid nav">
     <main class="row">
 
       <div class="col-4 d-flex gap-5 align-items-center">
@@ -21,8 +21,8 @@
         </div>
       </div>
 
-      <div class="col-4">
-        <div class="d-flex justify-content-center">
+      <div class="col-4 d-flex justify-content-center align-items-center">
+        <div>
           <h1>The Keepr Co.</h1>
         </div>
       </div>
@@ -52,6 +52,11 @@ export default {
 </script>
 
 <style scoped>
+.nav {
+  border-bottom: solid;
+  margin-bottom: 1rem;
+}
+
 h1,
 p {
   margin: 0;

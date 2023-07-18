@@ -7,14 +7,14 @@
                         <div class="keep-img">
                             <!-- img -->
                             <div class="dropdown options-container" v-if="keep.creatorId == account?.id">
-                                <button class="btn btn-secondary m-1 dropdown-toggle" type="button"
-                                    data-bs-toggle="dropdown">
+                                <button class="btn btn-dark m-1 dropdown-toggle" type="button" data-bs-toggle="dropdown">
                                     Options
                                 </button>
-                                <div class="dropdown-menu">
-                                    <button @click.prevent="deleteKeep(keep.id)"
-                                        class="btn btn-danger delete-button">Delete</button>
-                                </div>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#">Edit</a></li>
+                                    <li><a class="dropdown-item" href="#" @click.prevent="deleteKeep(keep.id)">Delete</a>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                     </div>
