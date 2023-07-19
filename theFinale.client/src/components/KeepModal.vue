@@ -39,11 +39,21 @@
                         <section class="row mb-2" v-if="keep.creatorId && !keep.vaultKeepId">
                             <form @submit.prevent="createVaultKeep(keep.id)">
                                 <div class="d-flex justify-content-between">
-                                    <div class="d-flex mx-2">
+                                    <div class="d-flex mx-2" v-if="account.id">
                                         <select class="vault-options mx-2" v-model="editable.vaultId">
                                             <option disabled selected value="">Choose Vault</option>
                                             <option v-for="v in vaults" :key="v.id" :value="v.id">{{ v.name }}</option>
                                         </select>
+                                        <!-- TODO maybe redo the select button its kinda stinky -->
+                                        <!-- <div class="btn-group dropup me-2">
+                                            <button type="button" class="btn btn-outline-dark dropdown-toggle"
+                                                data-bs-toggle="dropdown">{{ selected.name }}</button>
+                                            <ul class="dropdown-menu">
+                                                <li class="selectable" v-for="v in vaults" :key="v.id" :value="v.id"
+                                                    @click="select(v.name, v.id)">{{
+                                                        v.name }}</li>
+                                            </ul>
+                                        </div> -->
                                         <button class="btn btn-dark" data-bs-dismiss="modal">Save</button>
                                     </div>
                                     <router-link :to="{ name: 'Profile', params: { id: keep?.creatorId } }">
@@ -92,8 +102,10 @@ import { Modal } from "bootstrap";
 export default {
     setup() {
         const editable = ref({ vaultId: '' })
+        const selected = ref({ name: "Choose Vault" })
 
         return {
+            selected,
             editable,
             keep: computed(() => AppState.activeKeep),
             keepImg: computed(() => `url(${AppState.activeKeep.img})`),
@@ -139,6 +151,10 @@ export default {
 
 
 <style lang="scss" scoped>
+.vault-options {
+    border-radius: 5px;
+}
+
 select {
     outline: none;
     border: none;

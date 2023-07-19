@@ -42,7 +42,7 @@ export default {
 
 <style lang="scss" scoped>
 .locked {
-    color: red;
+    color: black;
     font-size: 2rem;
 }
 

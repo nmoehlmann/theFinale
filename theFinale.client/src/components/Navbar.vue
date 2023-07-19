@@ -77,4 +77,10 @@ h1,
 p {
   margin: 0;
 }
+
+@media(max-width: 625px) {
+  .keepr-img {
+    display: none;
+  }
+}
 </style>
