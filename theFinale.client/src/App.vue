@@ -6,7 +6,7 @@
     <router-view />
   </main>
 
-  <Modal id="keepModal" class="modal instant" tabindex="-1" role="dialog">
+  <Modal id="keepModal" class="modal fade" tabindex="-1" role="dialog">
     <KeepModal />
   </Modal>
 
@@ -30,7 +30,6 @@
   <Modal id="vaultEditor" class="modal fade" tabindex="-1" role="dialog">
     <VaultEditor />
   </Modal>
-
 </template>
 
 <script>
@@ -60,5 +59,13 @@ footer {
   display: grid;
   place-content: center;
   height: 32px;
+}
+
+main {
+  background-color: var(--light-white)
+}
+
+.modals {
+  background-color: var(--light-white)
 }
 </style>

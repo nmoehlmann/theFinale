@@ -3,7 +3,7 @@
         <div class="modal-content">
             <main class="container-fluid">
                 <section class="row" v-if="keep">
-                    <div class="col-lg-6">
+                    <div class="col-lg-6 m-0 p-0">
                         <div class="keep-img">
                             <!-- img -->
                             <div class="dropdown options-container"
@@ -22,22 +22,25 @@
                     </div>
                     <div class="col-lg-6 d-flex flex-column justify-content-between">
                         <section class="row mb-3">
-                            <div class="d-flex justify-content-center gap-3">
-                                <p><i class="mdi mdi-eye"></i>views {{ keep.views }}</p>
-                                <p>kept {{ keep.kept }}</p>
+                            <div class="d-flex justify-content-center gap-5 mt-3">
+                                <p title="views"><i class="mdi mdi-eye"></i> {{ keep.views }}</p>
+                                <div class="d-flex gap-2" title="kept">
+                                    <img src="src/assets/img/kept.png" alt="">
+                                    <p>{{ keep.kept }}</p>
+                                </div>
                             </div>
                         </section>
                         <section class="row mb-5">
                             <div class="d-flex flex-column align-items-center">
-                                <h1>{{ keep.name }}</h1>
-                                <p>{{ keep.description }}</p>
+                                <h1 class="mb-3">{{ keep.name }}</h1>
+                                <p class="p-3">{{ keep.description }}</p>
                             </div>
                         </section>
                         <section class="row mb-2" v-if="keep.creatorId && !keep.vaultKeepId">
                             <form @submit.prevent="createVaultKeep(keep.id)">
                                 <div class="d-flex justify-content-between">
                                     <div class="d-flex mx-2">
-                                        <select class="vault-options mx-2" v-model="editable.vaultId" required>
+                                        <select class="vault-options mx-2" v-model="editable.vaultId">
                                             <option disabled selected value="">Choose Vault</option>
                                             <option v-for="v in vaults" :key="v.id" :value="v.id">{{ v.name }}</option>
                                         </select>
@@ -63,7 +66,7 @@
                                     <router-link :to="{ name: 'Profile', params: { id: keep?.creatorId } }">
                                         <div class="d-flex gap-2" data-bs-dismiss="modal">
                                             <img class="creator-img rounded-circle" :src="keep.creator?.picture" alt="">
-                                            <p>{{ keep?.creator?.name }}</p>
+                                            <!-- <p class="">{{ keep?.creator?.name }}</p> -->
                                         </div>
                                     </router-link>
                                 </div>
@@ -136,6 +139,11 @@ export default {
 
 
 <style lang="scss" scoped>
+select {
+    outline: none;
+    border: none;
+}
+
 .delete-button {
     position: relative;
     left: 2.5rem;
@@ -164,12 +172,6 @@ export default {
     border-bottom: red solid;
 }
 
-.vault-options {
-    outline: none;
-    border: none;
-
-}
-
 .creator-img {
     height: 2rem;
     aspect-ratio: 1/1;
@@ -179,7 +181,7 @@ export default {
     background-image: v-bind(keepImg);
     height: 30rem;
     background-position: center;
-    background-size: contain;
+    background-size: cover;
     background-repeat: no-repeat;
 }
 

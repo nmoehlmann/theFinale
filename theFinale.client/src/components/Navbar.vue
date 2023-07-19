@@ -1,5 +1,5 @@
 <template>
-  <nav class="container-fluid nav">
+  <nav class="container-fluid nav shadow-sm">
     <main class="row">
 
       <div class="col-4 d-flex gap-3 align-items-center">
@@ -23,7 +23,7 @@
 
       <div class="col-4 d-flex justify-content-center align-items-center">
         <div>
-          <img class="keepr-img" src="src/assets/img/Keepr-logo.png" alt="">
+          <img class="keepr-img my-3" src="src/assets/img/Keepr-logo.png" alt="">
         </div>
       </div>
 
@@ -69,8 +69,8 @@ export default {
 }
 
 .nav {
-  border-bottom: solid, ;
-  margin-bottom: 1rem;
+  border-bottom: solid;
+  border-color: var(--purple);
 }
 
 h1,

@@ -1,15 +1,17 @@
 <template>
     <div class="modal-dialog modal-dialog-centered modal-md">
-        <div class="modal-content container">
-            <section class="d-flex justify-content-between mb-1">
-                <h1>Vault Editor</h1>
-                <button class="btn btn-close mt-2" data-bs-dismiss="modal"></button>
+        <div class="modal-content container modal-background">
+            <section class="header-background row">
+                <div class="d-flex justify-content-between">
+                    <h1>Vault Editor</h1>
+                    <button class="btn btn-close mt-2" data-bs-dismiss="modal"></button>
+                </div>
             </section>
             <section class="row">
                 <form action="" class="row" @submit.prevent="updateVault(vault.id)">
-                    <div class="col-6">
+                    <div class="col-6 m-0 p-0">
                         <div
-                            class="vault-img d-flex flex-column justify-content-end align-items-center title-text text-light">
+                            class="vault-img d-flex flex-column justify-content-end align-items-center title-text text-light text-center">
                             <h1>{{ vault.name }}</h1>
                             <p>By: {{ vault?.creator?.name }}</p>
                         </div>
@@ -44,6 +46,7 @@ import { AppState } from '../AppState';
 import Pop from "../utils/Pop.js";
 import { logger } from "../utils/Logger.js";
 import { vaultsService } from "../services/VaultsService.js";
+import { Modal } from "bootstrap";
 
 export default {
     setup() {
@@ -63,6 +66,8 @@ export default {
             async updateVault(vaultId) {
                 try {
                     await vaultsService.updateVault(vaultId, editable.value)
+                    Pop.success("Updated Vault")
+                    Modal.getOrCreateInstance('#vaultEditor').hide()
                 } catch (error) {
                     Pop.error("Error updating vault")
                     logger.log(error)
@@ -75,13 +80,23 @@ export default {
 
 
 <style lang="scss" scoped>
+.header-background {
+    background-color: var(--light-brown);
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.modal-background {
+    background-color: var(--light-white)
+}
+
 .vault-img {
     background-image: v-bind(vaultImg);
     height: 20rem;
     background-size: fill;
     background-repeat: no-repeat;
     background-position: center;
-    border-radius: 5px;
+    border-bottom-left-radius: 5px;
 }
 
 .title-text {

@@ -5,7 +5,8 @@
       <img class="keep-img img-fluid" :src="keep.img" alt="">
       <div class="keep-details p-2">
         <section class="d-flex flex-column align-items-start">
-          <img class="rounded-circle pfp" :src="keep?.creator?.picture" alt="" v-if="page == 'home'">
+          <img :title="keep?.creator?.name" class="rounded-circle pfp" :src="keep?.creator?.picture" alt=""
+            v-if="page == 'home'">
           <div class="title-card text-light">
             <h1>{{ keep.name }}</h1>
           </div>

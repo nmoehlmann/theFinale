@@ -8,7 +8,7 @@
             </section>
             <section class="row">
                 <form @submit.prevent="updateKeep(keep?.id)" class="row">
-                    <div class="col-6 d-flex flex-column">
+                    <div class="col-12 col-xl-6 d-flex flex-column">
                         <div class="d-flex gap-3 mb-3 justify-content-center">
                             <label for="">Image URL</label>
                             <input type="text" v-model="editable.img">
@@ -17,7 +17,7 @@
                             <img class="img-card elevation-3 m-3" :src="keep?.img" alt="">
                         </div>
                     </div>
-                    <div class="col-6 d-flex flex-column justify-content-between">
+                    <div class="col-12 col-xl-6 d-flex flex-column justify-content-between">
                         <div class="d-flex gap-3 flex-column align-items-start">
                             <label for="">Title:</label>
                             <input type="text" v-model="editable.name">
@@ -45,14 +45,14 @@ import { logger } from '../utils/Logger';
 import { keepsService } from '../services/KeepsService';
 
 export default {
-    setup(){
+    setup() {
         const editable = ref({})
 
         watchEffect(() => {
             if (!AppState.activeKeep) {
                 return
             }
-            editable.value = { ...AppState.activeKeep}
+            editable.value = { ...AppState.activeKeep }
         })
         return {
             editable,
@@ -73,26 +73,26 @@ export default {
 
 
 <style lang="scss" scoped>
+.description {
+    min-height: 10rem;
+}
 
-    .description {
-        min-height: 10rem;
-    }
+.back-button {
+    margin: 0;
+    position: relative;
+    right: .8rem;
+    border-radius: 0;
+}
 
-    .back-button {
-        margin: 0;
-        position: relative;
-        right: .8rem;
-        border-radius: 0;
-    }
+.img-container {
+    display: flex;
+    justify-content: center;
+}
 
-    .img-container {
-        display: flex;
-        justify-content: center;
-    }
-    .img-card {
-        object-fit: contain;
-        height: 20rem;
-        border-radius: 5px;
-        padding: 1rem;
-    }
+.img-card {
+    object-fit: contain;
+    height: 20rem;
+    border-radius: 5px;
+    padding: 1rem;
+}
 </style>

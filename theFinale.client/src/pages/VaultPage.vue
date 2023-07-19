@@ -2,9 +2,14 @@
   <header class="container" v-if="vault">
     <section class="row">
       <div
-        class="col-6 offset-3 vault-img d-flex align-items-center justify-content-end text-light flex-column title-text">
-        <h1>{{ vault?.name }}</h1>
-        <p>By: {{ vault?.creator?.name }}</p>
+        class="col-6 offset-3 vault-img d-flex justify-content-end text-light flex-column title-text align-items-center">
+        <div v-if="vault.isPrivate" class="mb-5 fs-1" title="Private Vault">
+          <i class="mdi mdi-lock"></i>
+        </div>
+        <div class="d-flex flex-column align-items-center">
+          <h1>{{ vault?.name }}</h1>
+          <p>By: {{ vault?.creator?.name }}</p>
+        </div>
       </div>
       <div class="d-flex justify-content-center mt-3 fw-medium fs-3">
         <p class="keep-count">{{ keeps.length }} Keeps</p>
@@ -13,8 +18,8 @@
             ...
           </button>
           <ul class="dropdown-menu">
-            <li><a @click.prevent="deleteVault()" class="dropdown-item" href="#">Delete Vault</a></li>
             <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#vaultEditor">Edit Vault</a></li>
+            <li><a @click.prevent="deleteVault()" class="dropdown-item" href="#">Delete Vault</a></li>
           </ul>
         </div>
       </div>
