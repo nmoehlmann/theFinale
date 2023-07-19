@@ -71,6 +71,7 @@ public class AccountsRepository
     picture = @picture,
     email = @email,
     coverImg = @coverImg
+    WHERE id = @id
     ;";
     _db.Execute(sql, updateData);
   }

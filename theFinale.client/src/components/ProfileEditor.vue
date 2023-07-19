@@ -75,6 +75,8 @@ export default {
 
 .pfp {
   border-radius: 50%;
+  height: 10rem;
+  aspect-ratio: 1/1;
 }
 
 .input {

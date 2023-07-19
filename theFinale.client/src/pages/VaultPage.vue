@@ -78,7 +78,7 @@ export default {
         try {
           if (await Pop.confirm("Are you sure you want to delete this Vault?")) {
             await vaultsService.deleteVault(route.params.id)
-            router.push({ name: 'Home' })
+            router.push({ name: 'Account' })
             Pop.success("Deleted Vault")
           }
         } catch (error) {

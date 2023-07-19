@@ -70,6 +70,8 @@ export default {
 
 .pfp {
     border-radius: 50%;
+    height: 15rem;
+    aspect-ratio: 1/1;
 }
 
 .coverImg {
