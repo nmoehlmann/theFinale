@@ -22,6 +22,10 @@
     id="profileEditor">
     <ProfileEditor :account="account" />
   </section>
+
+  <Modal id="keepEditor" class="modal fade" tabindex="-1" role="dialog">
+    <KeepEditor />
+  </Modal>
 </template>
 
 <script>
