@@ -48,6 +48,7 @@ import { logger } from '../utils/Logger';
 import { Modal } from 'bootstrap';
 import { vaultsService } from '../services/VaultsService';
 import Pop from "../utils/Pop.js";
+import { router } from "../router.js";
 
 export default {
   setup() {
@@ -62,6 +63,7 @@ export default {
           editable.value = {}
           Modal.getOrCreateInstance('#vaultForm').hide()
           Pop.success("Created Vault")
+          router.push({ name: 'Account' })
         } catch (error) {
           logger.log('error creating vault', error)
         }

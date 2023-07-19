@@ -2,9 +2,9 @@
   <nav class="container-fluid nav">
     <main class="row">
 
-      <div class="col-4 d-flex gap-5 align-items-center">
+      <div class="col-4 d-flex gap-3 align-items-center">
         <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
-          <div>
+          <div class="home-button">
             <h1 class="fs-2 fw-medium">Home</h1>
           </div>
         </router-link>
@@ -23,7 +23,7 @@
 
       <div class="col-4 d-flex justify-content-center align-items-center">
         <div>
-          <h1>The Keepr Co.</h1>
+          <img class="keepr-img" src="src/assets/img/Keepr-logo.png" alt="">
         </div>
       </div>
 
@@ -51,9 +51,25 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+.keepr-img {
+  height: 4rem;
+}
+
+.home-button {
+  background-color: var(--purple);
+  border-radius: 15%;
+  padding: .25rem;
+  margin-left: 2rem;
+  transition: 300ms;
+}
+
+.home-button:hover {
+  background-color: var(--light-purple);
+}
+
 .nav {
-  border-bottom: solid;
+  border-bottom: solid, ;
   margin-bottom: 1rem;
 }
 

@@ -25,7 +25,7 @@ namespace theFinale.Services
     internal Keep GetKeepById(int keepId)
     {
       Keep keep = _repo.GetKeepById(keepId);
-      if (keep == null) throw new Exception("Invalid Id");
+      if (keep.name == null) throw new Exception("Invalid Id");
       keep.views++;
       _repo.UpdateKeep(keep);
       return keep;
@@ -52,7 +52,7 @@ namespace theFinale.Services
     internal Keep DeleteKeep(int keepId, string userId)
     {
       Keep foundKeep = GetKeepById(keepId);
-      // if (foundKeep == null) throw new Exception("Keep doesnt exist");
+      if (foundKeep == null) throw new Exception("Keep doesnt exist");
       if (foundKeep.creatorId != userId) throw new Exception("Unauthorized to delete");
 
       int rows = _repo.DeleteKeep(keepId);

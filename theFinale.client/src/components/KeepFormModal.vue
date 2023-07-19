@@ -40,6 +40,7 @@ import Pop from "../utils/Pop.js";
 import { logger } from "../utils/Logger.js";
 import { keepsService } from "../services/KeepsService.js"
 import { Modal } from "bootstrap";
+import { router } from "../router.js";
 
 export default {
   setup() {
@@ -55,6 +56,7 @@ export default {
           editable.value = {}
           Modal.getOrCreateInstance('#keepForm').hide()
           Pop.success('Created Keep')
+          router.push({ name: 'Account' })
         } catch (error) {
           Pop.error(error)
         }
@@ -87,4 +89,5 @@ input {
 
 .description {
   width: 100%;
-}</style>
+}
+</style>

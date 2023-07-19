@@ -38,6 +38,8 @@ class KeepsService{
     await api.delete(`api/keeps/${keepId}`)
     AppState.keeps = AppState.keeps.filter(k => k.id != keepId)
     logger.log("filtered keeps appstate", AppState.keeps)
+    AppState.userKeeps = AppState.userKeeps.filter(k => k.id != keepId)
+    logger.log("filtered users keeps appstate", AppState.userKeeps)
   }
 
   async updateKeep(keepId, updateData) {

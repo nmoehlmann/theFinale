@@ -1,13 +1,4 @@
 <template>
-  <!-- <main class="d-flex flex-column justify-content-between elevation-3 keep-img p-2" data-bs-toggle="modal"
-    data-bs-target="#keepModal" @click="getKeepById(keep.id, keep.vaultKeepId)" v-if="keep">
-    <div class="d-flex justify-content-end">
-      <img class="rounded-circle pfp" :src="keep?.creator?.picture" alt="">
-    </div>
-    <div class="d-flex justify-content-start title-card text-light p-2 mx-2">
-      <h1>{{ keep.name }}</h1>
-    </div>
-  </main> -->
   <main class="elevation-3" data-bs-toggle="modal" data-bs-target="#keepModal"
     @click="getKeepById(keep.id, keep.vaultKeepId)" v-if="keep">
     <div class="keep-backgroundImg">
@@ -55,10 +46,15 @@ export default {
 
 
 <style lang="scss" scoped>
+main {
+  border-radius: 5px;
+}
+
 .keep-backgroundImg {
   background-image: v-bind(keepImg);
   width: 100%;
   background-size: cover;
+  background-repeat: no-repeat;
   margin-bottom: 1rem;
   border-radius: 5px;
 }
