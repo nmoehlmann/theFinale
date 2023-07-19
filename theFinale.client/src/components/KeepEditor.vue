@@ -61,6 +61,7 @@ export default {
             async updateKeep(keepId) {
                 try {
                     await keepsService.updateKeep(keepId, editable.value)
+                    Pop.success("Updated Keep")
                 } catch (error) {
                     Pop.error('error updating keep')
                     logger.log(error)

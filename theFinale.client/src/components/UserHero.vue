@@ -65,10 +65,11 @@ export default {
 
 .pfp-container {
     position: relative;
-    bottom: 4rem;
+    bottom: 8rem;
 }
 
 .pfp {
+    outline: solid;
     border-radius: 50%;
     height: 15rem;
     aspect-ratio: 1/1;

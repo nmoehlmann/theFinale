@@ -27,8 +27,8 @@
         </div>
       </div>
 
-      <div class="col-4">
-        <div class="d-flex justify-content-end">
+      <div class="col-4 d-flex justify-content-end align-items-center">
+        <div class="pfp">
           <Login />
         </div>
       </div>
@@ -52,6 +52,10 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.pfp {
+  border-radius: 50%;
+}
+
 .keepr-img {
   height: 4rem;
 }

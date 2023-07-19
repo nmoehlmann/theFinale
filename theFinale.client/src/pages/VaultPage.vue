@@ -2,11 +2,11 @@
   <header class="container" v-if="vault">
     <section class="row">
       <div
-        class="col-6 offset-3 vault-img d-flex justify-content-end text-light flex-column title-text align-items-center">
+        class="col-6 offset-3 vault-img d-flex justify-content-end text-light flex-column title-text align-items-center mt-3">
         <div v-if="vault.isPrivate" class="mb-5 fs-1" title="Private Vault">
           <i class="mdi mdi-lock"></i>
         </div>
-        <div class="d-flex flex-column align-items-center">
+        <div class="d-flex flex-column align-items-center title-card">
           <h1>{{ vault?.name }}</h1>
           <p>By: {{ vault?.creator?.name }}</p>
         </div>
@@ -98,9 +98,16 @@ export default {
 
 
 <style lang="scss" scoped>
+.title-card {
+  margin-bottom: 1rem;
+}
+
 .keep-count {
+  background-color: var(--purple);
   position: relative;
   left: 2rem;
+  padding: .50rem;
+  border-radius: 20%;
 }
 
 .options {
@@ -112,7 +119,7 @@ export default {
 .vault-img {
   background-image: v-bind(vaultImg);
   height: 20rem;
-  background-size: fill;
+  background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   border-radius: 5px;

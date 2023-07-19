@@ -117,6 +117,7 @@ export default {
                     editable.value.keepId = keepId
                     await vaultKeepsService.createVaultKeep(editable.value)
                     editable.value = { vaultId: '' }
+                    Pop.success("Saved keep to vault!")
                 } catch (error) {
                     Pop.error('error creating vaultKeep')
                     logger.log(error)
