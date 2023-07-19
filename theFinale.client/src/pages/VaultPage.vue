@@ -14,6 +14,7 @@
           </button>
           <ul class="dropdown-menu">
             <li><a @click.prevent="deleteVault()" class="dropdown-item" href="#">Delete Vault</a></li>
+            <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#vaultEditor">Edit Vault</a></li>
           </ul>
         </div>
       </div>

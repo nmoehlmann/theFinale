@@ -34,10 +34,16 @@ class KeepsService{
     logger.log(AppState.userKeeps)
   }
 
-  async deleteKeep(keepId) {
-    await api.delete(`api/keeps/${keepId}`)
+  async deleteKeep(updateData, keepId) {
+    await api.delete(`api/keeps/${keepId}`, updateData)
     AppState.keeps = AppState.keeps.filter(k => k.id != keepId)
     logger.log("filtered keeps appstate", AppState.keeps)
+  }
+
+  async updateKeep(keepId, updateData) {
+    const res = await api.put(`api/keeps/${keepId}`, updateData)
+    AppState.activeKeep = new Keep(res.data)
+    logger.log('updated keep', AppState.activeKeep)
   }
 
 

@@ -26,6 +26,11 @@
   <Modal id="keepEditor" class="modal fade" tabindex="-1" role="dialog">
     <KeepEditor />
   </Modal>
+
+  <Modal id="vaultEditor" class="modal fade" tabindex="-1" role="dialog">
+    <VaultEditor />
+  </Modal>
+
 </template>
 
 <script>

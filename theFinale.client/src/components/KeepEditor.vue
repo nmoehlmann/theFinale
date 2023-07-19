@@ -7,25 +7,30 @@
                 </button>
             </section>
             <section class="row">
-                <div class="col-6 d-flex flex-column">
-                    <div class="d-flex gap-3 mb-3 justify-content-center">
-                        <label for="">Image URL</label>
-                        <input type="text" v-model="editable.img">
+                <form @submit.prevent="updateKeep(keep?.id)" class="row">
+                    <div class="col-6 d-flex flex-column">
+                        <div class="d-flex gap-3 mb-3 justify-content-center">
+                            <label for="">Image URL</label>
+                            <input type="text" v-model="editable.img">
+                        </div>
+                        <div class="img-container">
+                            <img class="img-card elevation-3 m-3" :src="keep?.img" alt="">
+                        </div>
                     </div>
-                    <div class="img-container">
-                        <img class="img-card elevation-3 m-3" :src="keep?.img" alt="">
+                    <div class="col-6 d-flex flex-column justify-content-between">
+                        <div class="d-flex gap-3 flex-column align-items-start">
+                            <label for="">Title:</label>
+                            <input type="text" v-model="editable.name">
+                        </div>
+                        <div class="d-flex flex-column gap-3 align-items-start my-5">
+                            <label class="text-center" for="">Description:</label>
+                            <textarea class="description" v-model="editable.description" cols="60" rows="4"></textarea>
+                        </div>
                     </div>
-                </div>
-                <div class="col-6 d-flex flex-column justify-content-between">
-                    <div class="d-flex gap-3 flex-column align-items-start">
-                        <label for="">Title:</label>
-                        <input type="text" v-model="editable.name">
+                    <div class="d-flex justify-content-end">
+                        <button type="submit" class="btn btn-dark m-1">Save</button>
                     </div>
-                    <div class="d-flex flex-column gap-3 align-items-start my-5">
-                        <label class="text-center" for="">Description:</label>
-                        <textarea class="description" v-model="editable.description" cols="60" rows="4"></textarea>
-                    </div>
-                </div>
+                </form>
             </section>
         </div>
     </div>
@@ -35,6 +40,9 @@
 <script>
 import { computed, ref, watchEffect } from 'vue';
 import { AppState } from '../AppState';
+import Pop from '../utils/Pop';
+import { logger } from '../utils/Logger';
+import { keepsService } from '../services/KeepsService';
 
 export default {
     setup(){
@@ -48,7 +56,16 @@ export default {
         })
         return {
             editable,
-            keep: computed(() => AppState.activeKeep)
+            keep: computed(() => AppState.activeKeep),
+
+            async updateKeep(keepId) {
+                try {
+                    await keepsService.updateKeep(keepId, editable.value)
+                } catch (error) {
+                    Pop.error('error updating keep')
+                    logger.log(error)
+                }
+            }
         }
     }
 }
