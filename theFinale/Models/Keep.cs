@@ -18,6 +18,6 @@ namespace theFinale.Models
 
   public class vk : Keep
   {
-    public int vaultKeepId {get; set;}
+    public int vaultKeepId { get; set; }
   }
 }

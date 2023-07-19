@@ -113,4 +113,14 @@ WHERE vaultKeeps.vaultId = 70;
 SELECT v.*, act.*
 FROM vaults v
     JOIN accounts act ON act.id = '64b17fe0de8c335127556c93'
-WHERE v.creatorId = '64b17fe0de8c335127556c93'
+WHERE
+    v.creatorId = '64b17fe0de8c335127556c93';
+
+SELECT
+    k.*,
+    creator.*,
+    COUNT(vk.id) AS kept
+FROM keeps k
+    JOIN accounts creator ON k.creatorId = creator.id
+    LEFT JOIN vaultKeeps vk ON k.id = vk.keepId
+GROUP BY (k.id);

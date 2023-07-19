@@ -39,14 +39,18 @@ namespace theFinale.Repositories
       string sql = @"
       SELECT
       k.*,
+      COUNT(vk.id) AS kept,
       creator.*
       FROM keeps k
       JOIN accounts creator ON k.creatorId = creator.id
+      LEFT JOIN vaultKeeps vk ON k.id = vk.keepId
+      GROUP BY (k.id)
       ;";
 
       List<Keep> keeps = _db.Query<Keep, Account, Keep>(sql, (keep, creator) =>
       {
         keep.creator = creator;
+
         return keep;
       }).ToList();
       return keeps;
@@ -57,9 +61,11 @@ namespace theFinale.Repositories
       string sql = @"
       SELECT
       k.*,
+      COUNT(vk.id) AS kept,
       creator.*
       FROM keeps k
       JOIN accounts creator ON k.creatorId = creator.id
+      LEFT JOIN vaultKeeps vk ON k.id = vk.keepId
       WHERE k.id = @keepId
       ;";
 

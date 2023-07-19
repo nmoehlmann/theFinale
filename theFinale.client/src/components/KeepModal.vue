@@ -6,13 +6,15 @@
                     <div class="col-lg-6">
                         <div class="keep-img">
                             <!-- img -->
-                            <div class="dropdown options-container" v-if="keep?.creatorId == account?.id">
+                            <div class="dropdown options-container"
+                                v-if="keep?.creatorId == account?.id && !keep.vaultKeepId">
                                 <button class="btn btn-dark m-1 dropdown-toggle" type="button" data-bs-toggle="dropdown">
                                     Options
                                 </button>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#keepEditor">Edit</a></li>
-                                    <li><a class="dropdown-item" href="#" @click.prevent="deleteKeep(keep.id)">Delete</a>
+                                    <li><a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                            data-bs-target="#keepEditor">Edit</a></li>
+                                    <li><a class="dropdown-item" href="#" @click.prevent="deleteKeep(keep?.id)">Delete</a>
                                     </li>
                                 </ul>
                             </div>
