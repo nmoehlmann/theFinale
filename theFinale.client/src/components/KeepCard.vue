@@ -1,5 +1,5 @@
 <template>
-  <main class="elevation-3" data-bs-toggle="modal" data-bs-target="#keepModal"
+  <main class="elevation-3 selectable" data-bs-toggle="modal" data-bs-target="#keepModal"
     @click="getKeepById(keep.id, keep.vaultKeepId)" v-if="keep">
     <div class="keep-backgroundImg">
       <img class="keep-img img-fluid" :src="keep.img" alt="">
@@ -71,7 +71,10 @@ main {
 
 .pfp {
   height: 2.5rem;
+  aspect-ratio: 1/1;
   margin-bottom: 1rem;
+  object-fit: contain;
+  background: rgba($color: #000000, $alpha: .7)
 }
 
 .title-card {

@@ -74,9 +74,10 @@ export default {
 }
 
 .pfp {
-  border-radius: 50%;
+  object-fit: contain;
   height: 10rem;
   aspect-ratio: 1/1;
+  border-radius: 50%;
 }
 
 .input {

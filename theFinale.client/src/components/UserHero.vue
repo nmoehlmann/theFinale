@@ -7,6 +7,7 @@
                     Profile Editor
                 </button>
             </div>
+            <div class="img-blur"></div>
             <img class="coverImg img-fluid" :src="account.coverImg" alt="">
             <div class="d-flex flex-column align-items-center pfp-container">
                 <img class="pfp" :src="account?.picture" alt="">
@@ -39,12 +40,13 @@ export default {
     props: {
         account: { type: Account, required: true }
     },
-    setup() {
+    setup(props) {
 
         return {
             keeps: computed(() => AppState.userKeeps),
             vaults: computed(() => AppState.vaults),
-            authAccount: computed(() => AppState.account)
+            authAccount: computed(() => AppState.account),
+            backgroundImg: computed(() => `url(${props.account?.coverImg})`)
         }
     }
 }
@@ -52,6 +54,22 @@ export default {
 
 
 <style lang="scss" scoped>
+
+.img-blur {
+    background-image: v-bind(backgroundImg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    filter:blur(8px);
+    -webkit-filter: blur(8px);
+}
+
+.coverImg {
+    object-fit: contain;
+    object-position: center;
+    width: 100%;
+    margin: 0;
+}
 .edit-button {
     position: relative;
     top: 3rem;
@@ -69,17 +87,12 @@ export default {
 }
 
 .pfp {
+    background-color: black;
+    object-fit: contain;
     outline: solid;
     border-radius: 50%;
     height: 15rem;
     aspect-ratio: 1/1;
 }
 
-.coverImg {
-    object-fit: cover;
-    object-position: center;
-    width: 100%;
-    height: 30rem;
-    margin: 0;
-}
 </style>

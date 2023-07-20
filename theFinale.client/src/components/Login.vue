@@ -1,14 +1,14 @@
 <template>
   <span class="navbar-text">
-    <button class="btn selectable text-success lighten-30 text-uppercase my-2 my-lg-0" @click="login"
+    <button class="btn selectable lighten-30 text-uppercase my-2 my-lg-0 login-button mdi mdi-login" @click="login"
       v-if="!user.isAuthenticated">
       Login
     </button>
     <div v-else class="d-flex p-2">
       <div class="dropdown my-lg-0">
-        <div type="button" class="border-0 selectable no-select" data-bs-toggle="dropdown" aria-expanded="false">
-          <div v-if="account.picture || user.picture">
-            <img :src="account.picture || user.picture" alt="account photo" height="40" class="rounded" />
+        <div type="button" class="border-0 selectable no-select pfp-container d-flex justify-content-center align-items-center" data-bs-toggle="dropdown" aria-expanded="false">
+          <div v-if="account.picture || user.picture" class="">
+            <img :src="account.picture || user.picture" alt="account photo" height="40" class="pfp img-fluid rounded-circle" />
           </div>
         </div>
         <div class="dropdown-menu dropdown-menu-lg-end dropdown-menu-start p-0" aria-labelledby="authDropdown">
@@ -49,4 +49,20 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+  .login-button {
+    font-size: 1.5rem;
+  }
+
+  .pfp {
+    height: 4rem;
+    object-fit: contain;
+  }
+
+  .pfp-container {
+    background: rgba($color: #000000, $alpha: .5);
+    border-radius: 50%;
+    height: 4.5rem;
+    aspect-ratio: 1/1;
+  }
+</style>

@@ -1,5 +1,5 @@
 <template>
-    <div class="modal-dialog modal-dialog-centered modal-md">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content container modal-background">
             <section class="header-background row">
                 <div class="d-flex justify-content-between">

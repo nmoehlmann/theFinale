@@ -4,20 +4,21 @@
             <main class="container-fluid">
                 <section class="row" v-if="keep">
                     <div class="col-lg-6 m-0 p-0">
-                        <div class="keep-img">
+                        <div class="keep-img-background d-flex justify-content-center">
                             <!-- img -->
                             <div class="dropdown options-container"
-                                v-if="keep?.creatorId == account?.id && !keep.vaultKeepId">
-                                <button class="btn btn-dark m-1 dropdown-toggle" type="button" data-bs-toggle="dropdown">
-                                    Options
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#" data-bs-toggle="modal"
-                                            data-bs-target="#keepEditor">Edit</a></li>
+                            v-if="keep?.creatorId == account?.id && !keep.vaultKeepId">
+                            <button class="btn btn-dark m-1 dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                Options
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                    data-bs-target="#keepEditor">Edit</a></li>
                                     <li><a class="dropdown-item" href="#" @click.prevent="deleteKeep(keep?.id)">Delete</a>
                                     </li>
                                 </ul>
                             </div>
+                            <img class="keep-img img-fluid" :src="keep.img" alt="">
                         </div>
                     </div>
                     <div class="col-lg-6 d-flex flex-column justify-content-between">
@@ -39,27 +40,29 @@
                         <section class="row mb-2" v-if="keep.creatorId && !keep.vaultKeepId">
                             <form @submit.prevent="createVaultKeep(keep.id)">
                                 <div class="d-flex justify-content-between">
-                                    <div class="d-flex mx-2" v-if="account.id">
-                                        <select class="vault-options mx-2" v-model="editable.vaultId">
-                                            <option disabled selected value="">Choose Vault</option>
-                                            <option v-for="v in vaults" :key="v.id" :value="v.id">{{ v.name }}</option>
-                                        </select>
-                                        <!-- TODO maybe redo the select button its kinda stinky -->
-                                        <!-- <div class="btn-group dropup me-2">
-                                            <button type="button" class="btn btn-outline-dark dropdown-toggle"
+                                    <div>
+                                        <div class="d-flex mx-2" v-if="account.id">
+                                            <select class="vault-options mx-2" v-model="editable.vaultId">
+                                                <option disabled selected value="">Choose Vault</option>
+                                                <option v-for="v in vaults" :key="v.id" :value="v.id">{{ v.name }}</option>
+                                            </select>
+                                            <!-- TODO maybe redo the select button its kinda stinky -->
+                                            <!-- <div class="btn-group dropup me-2">
+                                                <button type="button" class="btn btn-outline-dark dropdown-toggle"
                                                 data-bs-toggle="dropdown">{{ selected.name }}</button>
-                                            <ul class="dropdown-menu">
-                                                <li class="selectable" v-for="v in vaults" :key="v.id" :value="v.id"
+                                                <ul class="dropdown-menu">
+                                                    <li class="selectable" v-for="v in vaults" :key="v.id" :value="v.id"
                                                     @click="select(v.name, v.id)">{{
                                                         v.name }}</li>
-                                            </ul>
-                                        </div> -->
-                                        <button class="btn btn-dark" data-bs-dismiss="modal">Save</button>
+                                                    </ul>
+                                                </div> -->
+                                                <button class="btn btn-dark" data-bs-dismiss="modal">Save</button>
+                                            </div>
                                     </div>
                                     <router-link :to="{ name: 'Profile', params: { id: keep?.creatorId } }">
                                         <div class="d-flex gap-2" data-bs-dismiss="modal">
                                             <img class="creator-img rounded-circle" :src="keep.creator?.picture" alt="">
-                                            <p>{{ keep?.creator?.name }}</p>
+                                            <p class="creator-name">{{ keep?.creator?.name }}</p>
                                         </div>
                                     </router-link>
                                 </div>
@@ -68,15 +71,17 @@
                         <section class="row mb-2" v-if="keep.creatorId && keep.vaultKeepId">
                             <form @submit.prevent="deleteVaultKeep(keep.vaultKeepId)">
                                 <div class="d-flex justify-content-between align-items-center">
-                                    <div class="remove-button-container">
-                                        <button class="remove-button" type="submit" data-bs-dismiss="modal"><i
-                                                class="mdi mdi-cancel"></i>
+                                    <div>
+                                        <div class="remove-button-container" v-if="account.id && activeVault.creatorId == account.id">
+                                            <button class="remove-button" type="submit" data-bs-dismiss="modal"><i
+                                            class="mdi mdi-cancel"></i>
                                             Remove</button>
+                                        </div>
                                     </div>
                                     <router-link :to="{ name: 'Profile', params: { id: keep?.creatorId } }">
                                         <div class="d-flex gap-2" data-bs-dismiss="modal">
                                             <img class="creator-img rounded-circle" :src="keep.creator?.picture" alt="">
-                                            <!-- <p class="">{{ keep?.creator?.name }}</p> -->
+                                            <p class="creator-name">{{ keep?.creator?.name }}</p>
                                         </div>
                                     </router-link>
                                 </div>
@@ -111,6 +116,7 @@ export default {
             keepImg: computed(() => `url(${AppState.activeKeep.img})`),
             vaults: computed(() => AppState.myVaults),
             account: computed(() => AppState?.account),
+            activeVault: computed(() => AppState.activeVault),
 
             async createVaultKeep(keepId) {
                 try {
@@ -152,6 +158,27 @@ export default {
 
 
 <style lang="scss" scoped>
+
+.keep-img {
+    object-fit: contain;
+    height: 40rem;
+    backdrop-filter: blur(10px);
+    width: 100%;
+    height: 100%;
+}
+.keep-img-background {
+    background-image: v-bind(keepImg);
+    height: 40rem;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: -1;
+}
+
+.creator-name {
+    color: black;
+    font-size: 1.75rem;
+}
 .vault-options {
     border-radius: 5px;
 }
@@ -168,6 +195,8 @@ select {
 
 .options-container {
     color: red;
+    position: absolute;
+    z-index: 1;
 }
 
 .remove-button-container {
@@ -190,17 +219,13 @@ select {
 }
 
 .creator-img {
-    height: 2rem;
+    height: 3rem;
     aspect-ratio: 1/1;
+    object-fit: contain;
+    border-radius: 50%;
+    background: rgba($color: #000000, $alpha: .8);
 }
 
-.keep-img {
-    background-image: v-bind(keepImg);
-    height: 30rem;
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-}
 
 p {
     margin: 0;

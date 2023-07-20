@@ -55,8 +55,8 @@ export default {
       try {
         await vaultsService.getVaultById(route.params.id)
       } catch (error) {
-        Pop.error('error getting vault')
-        logger.log(error)
+        router.push({name: 'Home'})
+        Pop.error("Vault is private or doesnt exist")
       }
     }
 

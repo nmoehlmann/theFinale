@@ -9,6 +9,7 @@ class VaultsService {
         logger.log('vault res.data', res.data)
         AppState.vaults.push(new Vault(res.data))
         logger.log(AppState.vaults, 'vaults appstate')
+        AppState.myVaults.push(new Vault(res.data))
     }
 
     async getMyVaults() {
