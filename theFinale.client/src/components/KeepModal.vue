@@ -7,11 +7,11 @@
                         <div class="keep-img-background d-flex justify-content-center">
                             <!-- img -->
                             <div class="dropdown options-container"
-                            v-if="keep?.creatorId == account?.id && !keep.vaultKeepId">
-                            <button class="btn btn-dark m-1 dropdown-toggle" type="button" data-bs-toggle="dropdown">
-                                Options
-                            </button>
-                            <!-- <ul class="dropdown-menu">
+                                v-if="keep?.creatorId == account?.id && !keep.vaultKeepId">
+                                <button class="btn btn-dark m-1 dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                    Options
+                                </button>
+                                <!-- <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="#" data-bs-toggle="modal"
                                     data-bs-target="#keepEditor">Edit</a></li>
                                 v-if="keep?.creatorId == account?.id && !keep.vaultKeepId">
@@ -46,56 +46,39 @@
                             </div>
                         </section>
                         <section class="row mb-2" v-if="keep.creatorId && !keep.vaultKeepId">
-                            <form @submit.prevent="createVaultKeep(keep.id)">
-                                <div class="d-flex justify-content-between">
-                                    <div>
-                                        <div class="d-flex mx-2" v-if="account.id">
-                                            <select class="vault-options mx-2" v-model="editable.vaultId">
-                                                <option disabled selected value="">Choose Vault</option>
-                                                <option v-for="v in vaults" :key="v.id" :value="v.id">{{ v.name }}</option>
-                                            </select>
-                                            <!-- TODO maybe redo the select button its kinda stinky -->
-                                            <!-- <div class="btn-group dropup me-2">
-                                                <button type="button" class="btn btn-outline-dark dropdown-toggle"
-                                                data-bs-toggle="dropdown">{{ selected.name }}</button>
-                                                <ul class="dropdown-menu">
-                                                    <li class="selectable" v-for="v in vaults" :key="v.id" :value="v.id"
-                                                    @click="select(v.name, v.id)">{{
-                                                        v.name }}</li>
-                                                    </ul>
-                                                </div> -->
-                                                <button class="btn btn-dark" data-bs-dismiss="modal">Save</button>
-                                            </div>
-                                    <div class="d-flex mx-2" v-if="account.id">
+                            <!-- <form @submit.prevent="createVaultKeep(keep.id)"> -->
+                            <div class="d-flex justify-content-between">
+                                <!-- <div class="d-flex mx-2" v-if="account.id">
                                         <select class="vault-options mx-2" v-model="editable.vaultId">
                                             <option disabled selected value="">Choose Vault</option>
-                                            <option v-for="v in vaults" :key="v.id" :value="v.id">
-                                                <p>{{ v.name }}</p>
-                                            </option>
+                                            <option v-for="v in vaults" :key="v.id" :value="v.id">{{ v.name }}</option>
                                         </select>
-                                        <!-- TODO maybe redo the select button its kinda stinky -->
-                                        <button type="submit" class="btn btn-dark" data-bs-dismiss="modal">Save</button>
-                                    </div>
-                                    <router-link :to="{ name: 'Profile', params: { id: keep?.creatorId } }">
-                                        <div class="d-flex gap-2" data-bs-dismiss="modal">
-                                            <img class="creator-img rounded-circle" :src="keep.creator?.picture" alt="">
-                                            <p class="creator-name">{{ keep?.creator?.name }}</p>
-                                        </div>
-                                    </router-link>
+                                        <button class="btn btn-dark" data-bs-dismiss="modal">Save</button>
+                                    </div> -->
+                                <div class="d-flex mx-2">
+                                    <button v-if="account.id" class="btn btn-outline-dark"
+                                        @click="toggleVaultSelector()">Save to
+                                        Vault</button>
                                 </div>
-                               </div> 
-                            </form>
+
+                                <router-link :to="{ name: 'Profile', params: { id: keep?.creatorId } }">
+                                    <div class="d-flex gap-2" data-bs-dismiss="modal">
+                                        <img class="creator-img rounded-circle" :src="keep.creator?.picture" alt="">
+                                        <p class="creator-name">{{ keep?.creator?.name }}</p>
+                                    </div>
+                                </router-link>
+                            </div>
+                            <!-- </form> -->
                         </section>
-                        <button @click="toggleVaultSelector()">Save to Vault
-                        </button>
                         <section class="row mb-2" v-if="keep.creatorId && keep.vaultKeepId">
                             <form @submit.prevent="deleteVaultKeep(keep.vaultKeepId)">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div>
-                                        <div class="remove-button-container" v-if="account.id && activeVault.creatorId == account.id">
+                                        <div class="remove-button-container"
+                                            v-if="account.id && activeVault.creatorId == account.id">
                                             <button class="remove-button" type="submit" data-bs-dismiss="modal"><i
-                                            class="mdi mdi-cancel"></i>
-                                            Remove</button>
+                                                    class="mdi mdi-cancel"></i>
+                                                Remove</button>
                                         </div>
                                     </div>
                                     <router-link :to="{ name: 'Profile', params: { id: keep?.creatorId } }">
@@ -191,7 +174,6 @@ export default {
 
 
 <style lang="scss" scoped>
-
 .keep-img {
     object-fit: contain;
     height: 40rem;
@@ -199,6 +181,7 @@ export default {
     width: 100%;
     height: 100%;
 }
+
 .keep-img-background {
     background-image: v-bind(keepImg);
     height: 40rem;
@@ -212,6 +195,7 @@ export default {
     color: black;
     font-size: 1.75rem;
 }
+
 .settings-button {
     background: rgba($color: #000000, $alpha: 1);
     color: var(--light-purple)

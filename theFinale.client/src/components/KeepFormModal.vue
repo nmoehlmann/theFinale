@@ -58,7 +58,7 @@ export default {
           Pop.success('Created Keep')
           router.push({ name: 'Account' })
         } catch (error) {
-          Pop.error(error)
+          Pop.error("You must be logged in to create a keep!")
         }
       }
     }

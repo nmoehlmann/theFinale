@@ -66,6 +66,7 @@ export default {
           Pop.success("Created Vault")
           router.push({ name: 'Account' })
         } catch (error) {
+          Pop.error("You must be logged in to create a vault")
           logger.log('error creating vault', error)
         }
       }
