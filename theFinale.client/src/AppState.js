@@ -21,5 +21,6 @@ export const AppState = reactive({
     profile: {},
     /** @type {import('./models/VaultKeep.js').VaultKeep} */
   keepsInVault: [],
-  page: ""
+  page: "",
+  vaultSelector: false
 })

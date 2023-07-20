@@ -15,8 +15,10 @@
             Create
           </button>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#keepForm">new keep</a></li>
-            <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#vaultForm">new vault</a></li>
+            <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#keepForm"
+                @click="autoFocus('keepForm')">new keep</a></li>
+            <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#vaultForm"
+                @click="autoFocus('vaultForm')">new vault</a></li>
           </ul>
         </div>
       </div>
@@ -44,7 +46,24 @@ import { AppState } from "../AppState.js";
 export default {
   setup() {
     return {
-      backButton: computed(() => AppState.backButtonActive)
+      backButton: computed(() => AppState.backButtonActive),
+
+      autoFocus(modalName) {
+        if (modalName == 'keepForm') {
+          const modal = document.getElementById('keepForm')
+          const input = document.getElementById('title-input')
+          modal.addEventListener('shown.bs.modal', () => {
+            input.focus()
+          })
+        }
+        if (modalName == 'vaultForm') {
+          const modal = document.getElementById('vaultForm')
+          const input = document.getElementById('input-vault')
+          modal.addEventListener('shown.bs.modal', () => {
+            input.focus()
+          })
+        }
+      }
     }
   },
   components: { Login }

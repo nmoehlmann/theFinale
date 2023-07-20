@@ -81,6 +81,7 @@ main {
   backdrop-filter: blur(13.9px);
   -webkit-backdrop-filter: blur(13.9px);
   padding: .25rem;
+  font-family: 'Marko One', serif;
 }
 
 p,

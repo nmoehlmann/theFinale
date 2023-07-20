@@ -8,7 +8,8 @@
                             <!-- img -->
                             <div class="dropdown options-container"
                                 v-if="keep?.creatorId == account?.id && !keep.vaultKeepId">
-                                <button class="btn btn-dark m-1 dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                <button class="btn btn-dark m-1 dropdown-toggle settings-button" type="button"
+                                    data-bs-toggle="dropdown">
                                     Options
                                 </button>
                                 <ul class="dropdown-menu">
@@ -32,7 +33,7 @@
                         </section>
                         <section class="row mb-5">
                             <div class="d-flex flex-column align-items-center">
-                                <h1 class="mb-3">{{ keep.name }}</h1>
+                                <h1 class="mb-3 title-text">{{ keep.name }}</h1>
                                 <p class="p-3">{{ keep.description }}</p>
                             </div>
                         </section>
@@ -42,19 +43,12 @@
                                     <div class="d-flex mx-2" v-if="account.id">
                                         <select class="vault-options mx-2" v-model="editable.vaultId">
                                             <option disabled selected value="">Choose Vault</option>
-                                            <option v-for="v in vaults" :key="v.id" :value="v.id">{{ v.name }}</option>
+                                            <option v-for="v in vaults" :key="v.id" :value="v.id">
+                                                <p>{{ v.name }}</p>
+                                            </option>
                                         </select>
                                         <!-- TODO maybe redo the select button its kinda stinky -->
-                                        <!-- <div class="btn-group dropup me-2">
-                                            <button type="button" class="btn btn-outline-dark dropdown-toggle"
-                                                data-bs-toggle="dropdown">{{ selected.name }}</button>
-                                            <ul class="dropdown-menu">
-                                                <li class="selectable" v-for="v in vaults" :key="v.id" :value="v.id"
-                                                    @click="select(v.name, v.id)">{{
-                                                        v.name }}</li>
-                                            </ul>
-                                        </div> -->
-                                        <button class="btn btn-dark" data-bs-dismiss="modal">Save</button>
+                                        <button type="submit" class="btn btn-dark" data-bs-dismiss="modal">Save</button>
                                     </div>
                                     <router-link :to="{ name: 'Profile', params: { id: keep?.creatorId } }">
                                         <div class="d-flex gap-2" data-bs-dismiss="modal">
@@ -65,6 +59,8 @@
                                 </div>
                             </form>
                         </section>
+                        <button @click="toggleVaultSelector()">Save to Vault
+                        </button>
                         <section class="row mb-2" v-if="keep.creatorId && keep.vaultKeepId">
                             <form @submit.prevent="deleteVaultKeep(keep.vaultKeepId)">
                                 <div class="d-flex justify-content-between align-items-center">
@@ -83,6 +79,9 @@
                             </form>
                         </section>
                     </div>
+                </section>
+                <section v-if="vaultToggle">
+                    <VaultSelector />
                 </section>
             </main>
         </div>
@@ -111,6 +110,16 @@ export default {
             keepImg: computed(() => `url(${AppState.activeKeep.img})`),
             vaults: computed(() => AppState.myVaults),
             account: computed(() => AppState?.account),
+            vaultToggle: computed(() => AppState.vaultSelector),
+
+            toggleVaultSelector() {
+                if (AppState.vaultSelector == false) {
+                    AppState.vaultSelector = true
+                } else {
+                    AppState.vaultSelector = false
+                }
+                logger.log(AppState.vaultSelector)
+            },
 
             async createVaultKeep(keepId) {
                 try {
@@ -152,6 +161,15 @@ export default {
 
 
 <style lang="scss" scoped>
+.settings-button {
+    background: rgba($color: #000000, $alpha: 1);
+    color: var(--light-purple)
+}
+
+.title-text {
+    font-family: 'Marko One', serif;
+}
+
 .vault-options {
     border-radius: 5px;
 }

@@ -52,6 +52,10 @@ export default {
 
 
 <style lang="scss" scoped>
+main {
+    margin-bottom: 12rem;
+}
+
 .edit-button {
     position: relative;
     top: 3rem;
