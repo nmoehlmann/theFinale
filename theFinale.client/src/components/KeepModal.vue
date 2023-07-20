@@ -8,7 +8,8 @@
                             <!-- img -->
                             <div class="dropdown options-container"
                                 v-if="keep?.creatorId == account?.id && !keep.vaultKeepId">
-                                <button class="btn btn-dark m-1 dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                <button class="btn btn-dark m-1 dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                                    title="keep options menu">
                                     Options
                                 </button>
                                 <!-- <ul class="dropdown-menu">
@@ -21,8 +22,9 @@
                                 </button> -->
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" href="#" data-bs-toggle="modal"
-                                            data-bs-target="#keepEditor">Edit</a></li>
-                                    <li><a class="dropdown-item" href="#" @click.prevent="deleteKeep(keep?.id)">Delete</a>
+                                            data-bs-target="#keepEditor" title="edit keep">Edit</a></li>
+                                    <li><a class="dropdown-item" href="#" @click.prevent="deleteKeep(keep?.id)"
+                                            title="delete keep">Delete</a>
                                     </li>
                                 </ul>
                             </div>
@@ -56,13 +58,14 @@
                                         <button class="btn btn-dark" data-bs-dismiss="modal">Save</button>
                                     </div> -->
                                 <div class="d-flex mx-2">
-                                    <button v-if="account.id" class="btn btn-outline-dark"
-                                        @click="toggleVaultSelector()">Toggle Vault Selector</button>
+                                    <button v-if="account.id" class="btn btn-outline-dark" @click="toggleVaultSelector()"
+                                        title="toggle vault selector">Toggle Vault Selector</button>
                                 </div>
 
                                 <router-link :to="{ name: 'Profile', params: { id: keep?.creatorId } }">
                                     <div class="d-flex gap-2" data-bs-dismiss="modal">
-                                        <img class="creator-img rounded-circle" :src="keep.creator?.picture" alt="">
+                                        <img class="creator-img rounded-circle" :src="keep.creator?.picture"
+                                            :alt="keep.creator?.name" :title="keep.creator?.name">
                                         <p class="creator-name">{{ keep?.creator?.name }}</p>
                                     </div>
                                 </router-link>
@@ -82,7 +85,8 @@
                                     </div>
                                     <router-link :to="{ name: 'Profile', params: { id: keep?.creatorId } }">
                                         <div class="d-flex gap-2" data-bs-dismiss="modal">
-                                            <img class="creator-img rounded-circle" :src="keep.creator?.picture" alt="">
+                                            <img class="creator-img rounded-circle" :src="keep.creator?.picture"
+                                                :alt="keep.creator?.name" :title="keep.creator?.name">
                                             <p class="creator-name">{{ keep?.creator?.name }}</p>
                                         </div>
                                     </router-link>
@@ -91,7 +95,7 @@
                         </section>
                     </div>
                 </section>
-                <section class="m-0 p-0" v-if="vaultToggle">
+                <section class="m-0 p-0 vault-toggle" v-if="vaultToggle">
                     <VaultSelector />
                 </section>
             </main>
@@ -173,6 +177,10 @@ export default {
 
 
 <style lang="scss" scoped>
+.vault-toggle {
+    transition: 2s;
+}
+
 .keep-img {
     object-fit: contain;
     height: 40rem;

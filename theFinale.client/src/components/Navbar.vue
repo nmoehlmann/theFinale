@@ -9,7 +9,7 @@
           </div>
         </router-link>
 
-        <div class="dropdown">
+        <div class="dropdown" v-if="account.id">
           <button class="btn dropdown-toggle create-button fs-2 fw-medium" type="button" data-bs-toggle="dropdown"
             aria-expanded="false">
             Create
@@ -47,6 +47,7 @@ export default {
   setup() {
     return {
       backButton: computed(() => AppState.backButtonActive),
+      account: computed(() => AppState.account),
 
       autoFocus(modalName) {
         if (modalName == 'keepForm') {
