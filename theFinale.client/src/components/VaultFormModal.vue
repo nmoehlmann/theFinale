@@ -14,7 +14,7 @@
               <span class="required">*</span>
             </div>
             <div class="input mb-5 d-flex">
-              <input class="input-text" type="text" placeholder="Image URL..." v-model="editable.img" required>
+              <input class="input-text" type="url" placeholder="Image URL..." v-model="editable.img" required>
               <span class="required">*</span>
             </div>
             <div class="mb-3 d-flex flex-column align-items-center">

@@ -1,7 +1,7 @@
 <template>
   <main class="vault-img-background d-flex flex-column selectable" @click="createVaultKeep(vault.id)">
     <div>
-      <i class="mdi mdi-lock" v-if="vault.isPrivate"></i>
+      <i title="private vault" class="mdi mdi-lock" v-if="vault.isPrivate"></i>
     </div>
     <div class="title-card d-flex flex-column align-items-center">
       <h1 class="fs-2">{{ vault.name }}</h1>

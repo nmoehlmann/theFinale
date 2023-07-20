@@ -5,7 +5,7 @@
     <main class="container">
         <section class="row">
             <h1>Vaults</h1>
-            <div class="col-4" v-for="v in vaults" :key="v.id">
+            <div class="col-6 col-lg-3" v-for="v in vaults" :key="v.id">
                 <VaultCard :vault="v" />
             </div>
         </section>

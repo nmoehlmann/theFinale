@@ -13,7 +13,8 @@
             <div class="d-flex flex-column align-items-center pfp-container">
                 <img class="pfp" :src="account?.picture" alt="">
                 <h1>{{ account.name }}</h1>
-                <p class="display-count">{{ keeps.length }} Keeps | {{ vaults.length }} Vaults</p>
+                <p class="display-count"><span class="keep-count">{{ keeps.length }}</span> Keeps | <span
+                        class="vault-count">{{ vaults.length }}</span> Vaults</p>
             </div>
         </div>
     </main>
@@ -60,6 +61,7 @@ export default {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    border-radius: 5px;
 }
 
 .coverImg {
@@ -69,6 +71,7 @@ export default {
     margin: 0;
     height: 40rem;
     backdrop-filter: blur(4px);
+    border-radius: 5px;
 }
 
 .edit-button {
@@ -81,6 +84,15 @@ export default {
 .display-count {
     font-weight: 600;
     margin-top: .5rem;
+    font-size: 1.5rem;
+}
+
+.keep-count,
+.vault-count {
+    color: var(--purple);
+    background-color: var(--darker-dark);
+    padding: .25rem;
+    border-radius: 10px;
 }
 
 .pfp-container {

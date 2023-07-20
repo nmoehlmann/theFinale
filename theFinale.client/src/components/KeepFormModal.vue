@@ -13,7 +13,7 @@
               <span class="required">*</span>
             </div>
             <div class="input mb-5 d-flex">
-              <input type="text" placeholder="Image URL..." v-model="editable.img" required>
+              <input type="url" placeholder="Image URL..." v-model="editable.img" required>
               <span class="required">*</span>
             </div>
             <div class="mb-3 d-flex flex-column align-items-center">
@@ -21,7 +21,8 @@
                 <p class="fs-5">Keep Description</p>
               </label>
               <textarea name="description" class="description" cols="30" rows="10" v-model="editable.description" required
-                minlength="2"></textarea>
+                minlength="2" maxlength="250"></textarea>
+              <!-- <p></p> -->
             </div>
             <div class="d-flex justify-content-end">
               <button type="submit" class="btn btn-dark">Create</button>

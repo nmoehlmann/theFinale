@@ -57,8 +57,7 @@
                                     </div> -->
                                 <div class="d-flex mx-2">
                                     <button v-if="account.id" class="btn btn-outline-dark"
-                                        @click="toggleVaultSelector()">Save to
-                                        Vault</button>
+                                        @click="toggleVaultSelector()">Toggle Vault Selector</button>
                                 </div>
 
                                 <router-link :to="{ name: 'Profile', params: { id: keep?.creatorId } }">
@@ -92,7 +91,7 @@
                         </section>
                     </div>
                 </section>
-                <section v-if="vaultToggle">
+                <section class="m-0 p-0" v-if="vaultToggle">
                     <VaultSelector />
                 </section>
             </main>

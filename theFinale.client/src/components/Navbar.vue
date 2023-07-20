@@ -1,5 +1,5 @@
 <template>
-  <nav class="container-fluid nav shadow-sm">
+  <nav class="container-fluid nav">
     <main class="row">
 
       <div class="col-4 d-flex gap-3 align-items-center">
@@ -94,6 +94,7 @@ export default {
 .nav {
   border-bottom: solid;
   border-color: var(--purple);
+  box-shadow: 2px 4px black;
 }
 
 h1,
