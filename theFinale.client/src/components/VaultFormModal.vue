@@ -9,7 +9,8 @@
           </section>
           <section>
             <div class="input mb-5 d-flex">
-              <input class="input-text" type="text" placeholder="Title..." v-model="editable.name" required minlength="2">
+              <input class="input-text" type="text" placeholder="Title..." v-model="editable.name" required minlength="2"
+                id="input-vault">
               <span class="required">*</span>
             </div>
             <div class="input mb-5 d-flex">

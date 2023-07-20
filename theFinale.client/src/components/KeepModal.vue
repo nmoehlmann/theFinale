@@ -11,9 +11,17 @@
                             <button class="btn btn-dark m-1 dropdown-toggle" type="button" data-bs-toggle="dropdown">
                                 Options
                             </button>
-                            <ul class="dropdown-menu">
+                            <!-- <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="#" data-bs-toggle="modal"
                                     data-bs-target="#keepEditor">Edit</a></li>
+                                v-if="keep?.creatorId == account?.id && !keep.vaultKeepId">
+                                <button class="btn btn-dark m-1 dropdown-toggle settings-button" type="button"
+                                    data-bs-toggle="dropdown">
+                                    Options
+                                </button> -->
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                            data-bs-target="#keepEditor">Edit</a></li>
                                     <li><a class="dropdown-item" href="#" @click.prevent="deleteKeep(keep?.id)">Delete</a>
                                     </li>
                                 </ul>
@@ -33,7 +41,7 @@
                         </section>
                         <section class="row mb-5">
                             <div class="d-flex flex-column align-items-center">
-                                <h1 class="mb-3">{{ keep.name }}</h1>
+                                <h1 class="mb-3 title-text">{{ keep.name }}</h1>
                                 <p class="p-3">{{ keep.description }}</p>
                             </div>
                         </section>
@@ -58,6 +66,15 @@
                                                 </div> -->
                                                 <button class="btn btn-dark" data-bs-dismiss="modal">Save</button>
                                             </div>
+                                    <div class="d-flex mx-2" v-if="account.id">
+                                        <select class="vault-options mx-2" v-model="editable.vaultId">
+                                            <option disabled selected value="">Choose Vault</option>
+                                            <option v-for="v in vaults" :key="v.id" :value="v.id">
+                                                <p>{{ v.name }}</p>
+                                            </option>
+                                        </select>
+                                        <!-- TODO maybe redo the select button its kinda stinky -->
+                                        <button type="submit" class="btn btn-dark" data-bs-dismiss="modal">Save</button>
                                     </div>
                                     <router-link :to="{ name: 'Profile', params: { id: keep?.creatorId } }">
                                         <div class="d-flex gap-2" data-bs-dismiss="modal">
@@ -66,8 +83,11 @@
                                         </div>
                                     </router-link>
                                 </div>
+                               </div> 
                             </form>
                         </section>
+                        <button @click="toggleVaultSelector()">Save to Vault
+                        </button>
                         <section class="row mb-2" v-if="keep.creatorId && keep.vaultKeepId">
                             <form @submit.prevent="deleteVaultKeep(keep.vaultKeepId)">
                                 <div class="d-flex justify-content-between align-items-center">
@@ -88,6 +108,9 @@
                             </form>
                         </section>
                     </div>
+                </section>
+                <section v-if="vaultToggle">
+                    <VaultSelector />
                 </section>
             </main>
         </div>
@@ -117,6 +140,16 @@ export default {
             vaults: computed(() => AppState.myVaults),
             account: computed(() => AppState?.account),
             activeVault: computed(() => AppState.activeVault),
+            vaultToggle: computed(() => AppState.vaultSelector),
+
+            toggleVaultSelector() {
+                if (AppState.vaultSelector == false) {
+                    AppState.vaultSelector = true
+                } else {
+                    AppState.vaultSelector = false
+                }
+                logger.log(AppState.vaultSelector)
+            },
 
             async createVaultKeep(keepId) {
                 try {
@@ -179,6 +212,15 @@ export default {
     color: black;
     font-size: 1.75rem;
 }
+.settings-button {
+    background: rgba($color: #000000, $alpha: 1);
+    color: var(--light-purple)
+}
+
+.title-text {
+    font-family: 'Marko One', serif;
+}
+
 .vault-options {
     border-radius: 5px;
 }

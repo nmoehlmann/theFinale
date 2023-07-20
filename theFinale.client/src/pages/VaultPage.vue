@@ -100,6 +100,7 @@ export default {
 <style lang="scss" scoped>
 .title-card {
   margin-bottom: 1rem;
+  font-family: 'Marko One', serif;
 }
 
 .keep-count {
@@ -154,11 +155,11 @@ export default {
   }
 }
 
-@media(max-width: 420px) {
-  .keep-container {
-    column-count: 1;
-    // padding-left: 1rem;
-    // padding-right: 1rem;
-  }
-}
+// @media(max-width: 420px) {
+//   .keep-container {
+//     column-count: 1;
+//     // padding-left: 1rem;
+//     // padding-right: 1rem;
+//   }
+// }
 </style>
