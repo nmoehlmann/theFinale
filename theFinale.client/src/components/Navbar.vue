@@ -25,7 +25,7 @@
 
       <div class="col-4 d-flex justify-content-center align-items-center">
         <div>
-          <img class="keepr-img my-3" src="src/assets/img/Keepr-logo.png" alt="">
+          <img class="keepr-img my-3" src="/Keepr-logo.png" alt="">
         </div>
       </div>
 
