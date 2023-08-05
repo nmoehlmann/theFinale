@@ -36,6 +36,7 @@
                             <div class="d-flex justify-content-center gap-5 mt-3">
                                 <p title="views"><i class="mdi mdi-eye"></i> {{ keep.views }}</p>
                                 <div class="d-flex gap-2" title="kept">
+                                    <!-- testing image directory -->
                                     <img src="/kept.png" alt="">
                                     <p>{{ keep.kept }}</p>
                                 </div>
