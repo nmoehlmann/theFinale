@@ -7,6 +7,7 @@
    <ItemGroup>
     <PackageReference Include="CodeWorks.Auth0Provider" Version="1.1.0" />
     <PackageReference Include="Dapper" Version="2.0.90" />
+    <PackageReference Include="DotNetEnv" Version="2.5.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.1" NoWarn="NU1605" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="6.0.1" NoWarn="NU1605" />
     <PackageReference Include="MySqlConnector" Version="2.1.0" />
