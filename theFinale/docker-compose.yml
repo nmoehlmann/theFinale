@@ -1,0 +1,7 @@
+version: '3'
+services:
+  web:
+    build: ./theFinale
+    image: nmoehlmann/theFinale:latest
+    ports:
+      - "7045:7045"
