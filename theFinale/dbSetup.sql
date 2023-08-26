@@ -1,4 +1,4 @@
--- Active: 1687895587777@@SG-Database-7664-mysql-master.servers.mongodirector.com@3306@firstDatabase
+-- Active: 1693078925419@@54.189.63.163@3306@keeprDB
 
 CREATE TABLE
     IF NOT EXISTS accounts(
