@@ -27,3 +27,4 @@ EXPOSE 7045
 
 # Set the entry point for the container
 ENTRYPOINT ["dotnet", "theFinale.dll"]
+
