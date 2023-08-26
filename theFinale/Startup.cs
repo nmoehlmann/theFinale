@@ -81,7 +81,7 @@ public class Startup
 
   private IDbConnection CreateDbConnection()
   {
-    string connectionString = Configuration["CONNECTION_STRING"];
+    string connectionString = Environment.GetEnvironmentVariable("CONNECTION_STRING");
     return new MySqlConnection(connectionString);
   }
 
